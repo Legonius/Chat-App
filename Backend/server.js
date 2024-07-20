@@ -6,6 +6,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.SERVER_PORT;
 
+app.use(express());
+
 app.get("/", (req, res) => {
   res.status(200).json({ Server: "is running" });
 });
