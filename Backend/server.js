@@ -1,7 +1,9 @@
 import express from "express";
+import cookieParser from "cookie-parser";
 import { createServer } from "http";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import { userRoute } from "./routes/user.routes.js";
 
 dotenv.config();
 
@@ -13,8 +15,10 @@ mongoose
 const app = express();
 const PORT = process.env.SERVER_PORT;
 
-app.use(express());
+app.use(cookieParser());
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use("/api/user", userRoute);
 
 app.get("/", (req, res) => {
   res.status(200).json({ Server: "is running" });

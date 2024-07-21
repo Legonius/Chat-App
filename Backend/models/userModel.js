@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import mongoose from "mongoose";
 
 const userSchema = new Schema(
   {
@@ -19,7 +20,7 @@ const userSchema = new Schema(
       unique: true,
       validate: {
         validator: function (v) {
-          return /@example\.com$/.test(v); // Custom validation logic
+          return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v); // Custom validation logic
         },
       },
       message: (props) =>
@@ -35,4 +36,4 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-export const userModel = model("User", userSchema);
+export const userModel = mongoose.model("User", userSchema);
