@@ -41,14 +41,15 @@ const login = async (req, res, next) => {
   const { username, password } = req.body;
   const user = await userModel.findOne({ username });
   if (!user) {
-    return res.status(400).json({ error: "User not Found" });
+    return res.status(400).json({ error: "User doesn't exist" });
   }
   const checkPassword = await bcryptjs.compare(password, user.password);
   if (!checkPassword) {
     return res.status(400).json({ error: "Incorrect Password" });
   }
-  const token = jwt.sign(req.body, process.env.JWT_CODE);
+  const token = jwt.sign({ username, email: user.email }, process.env.JWT_CODE);
   const oneHour = 3600000;
+  console.log(token);
   res.cookie("uid", token, {
     maxAge: oneHour,
     httpOnly: true,
@@ -58,4 +59,9 @@ const login = async (req, res, next) => {
   res.status(201).json({ login: "success" });
   next("Login Success");
 };
-export { signup, login };
+
+const logout = async (req, res, next) => {
+  res.clearCookie("uid");
+  next("logout");
+};
+export { signup, login, logout };
