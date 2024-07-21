@@ -49,7 +49,6 @@ const login = async (req, res, next) => {
   }
   const token = jwt.sign({ username, email: user.email }, process.env.JWT_CODE);
   const oneHour = 3600000;
-  console.log(token);
   res.cookie("uid", token, {
     maxAge: oneHour,
     httpOnly: true,
@@ -57,6 +56,7 @@ const login = async (req, res, next) => {
     sameSite: true,
   });
   res.status(201).json({ login: "success" });
+  console.log("user:", req.user);
   next("Login Success");
 };
 
