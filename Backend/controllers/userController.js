@@ -4,6 +4,7 @@ import bcryptjs from "bcryptjs";
 
 const signup = async (req, res) => {
   const { username, email, age, password, confirmPassword, gender } = req.body;
+  console.log(req.file);
   function checkPassword(v) {
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -30,6 +31,7 @@ const signup = async (req, res) => {
       age,
       password: hashPassword,
       gender,
+      avatar: req.file.filename,
     });
     res.status(202).json(newUser);
   } catch (error) {
