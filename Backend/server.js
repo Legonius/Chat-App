@@ -28,7 +28,7 @@ app.listen(PORT, () =>
   console.log(`Server is running at http://localhost:${PORT}`)
 );
 
-//Error Handling
+//Error Handling as middleware
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal server error";

@@ -17,6 +17,6 @@ const userRoute = express.Router();
 userRoute.use(checkAuthen);
 userRoute.post("/signup", upload.single("avatar"), signup);
 userRoute.post("/login", login);
-userRoute.post("/logout", logout);
+userRoute.get("/logout", logout);
 
 export { userRoute };
