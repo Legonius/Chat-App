@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { userRoute } from "./routes/user.routes.js";
 import msgRoute from "./routes/message.routes.js";
+import allUsersRoute from "./routes/allUsers.routes.js";
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/api/user", userRoute);
 app.use("/api/msg", msgRoute);
+app.use("/api/all-users", allUsersRoute);
 
 app.get("/", (req, res) => {
   res.status(200).json({ Server: "is running" });
