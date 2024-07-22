@@ -55,6 +55,9 @@ const signup = async (req, res, next) => {
 //Login Secssion
 const login = async (req, res, next) => {
   try {
+    if (req.cookie?.uid) {
+      res.clearCookie("uid");
+    }
     const { username, password } = req.body;
     const user = await userModel.findOne({ username });
     if (!user) {
@@ -76,10 +79,9 @@ const login = async (req, res, next) => {
       sameSite: true,
     });
     res.status(201).json({ login: "success" });
-    console.log("user:", req.user);
-    next("Login Success");
+    next();
   } catch (error) {
-    next(errorHandling(400, error.message));
+    next(error);
   }
 };
 

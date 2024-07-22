@@ -4,9 +4,9 @@ import { errorHandling } from "../utils/error.js";
 
 export const checkAuthen = async (req, res, next) => {
   try {
-    const token = req.cookies.uid;
+    const token = req.cookies?.uid;
     if (!token) {
-      return next(errorHandling(403, "Unauthorized"));
+      return next();
     }
     const payload = jwt.verify(token, process.env.JWT_CODE);
     if (!payload) {
