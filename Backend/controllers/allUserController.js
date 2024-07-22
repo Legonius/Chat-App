@@ -9,8 +9,13 @@ export const getAllUsers = async (req, res, next) => {
         _id: { $ne: userId },
       },
       "-password"
-    );
-    res.json(allUsers);
+    ); //.select("-password");this is same method
+    if (!allUsers) {
+      return res
+        .status(404)
+        .json({ success: false, message: "users not found" });
+    }
+    res.status(201).json(allUsers);
   } catch (error) {
     next(error);
   }
