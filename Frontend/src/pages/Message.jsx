@@ -6,7 +6,7 @@ import BackButton from "../components/BackButton.jsx";
 
 const Message = () => {
   return (
-    <div className="h-full w-full flex flex-col pt-10 justify-between">
+    <div className="h-full w-full flex flex-col pt-10 justify-between no-scrollbar">
       <div className="absolute w-full top-0 left-0 h-12 bg-slate-400 rounded-t-lg text-slate-50 font-extrabold text-xl flex items-center justify-start px-2">
         <img
           className="h-8 bg-cover rounded-full"
@@ -16,7 +16,7 @@ const Message = () => {
         <span className="ml-2">Username</span>
       </div>
       <BackButton link={"login"} />
-      <div className="flex-grow flex-col overflow-x-scroll">
+      <div className="flex-grow flex-col overflow-x-scroll no-scrollbar">
         <MsgSender />
         <MsgUser />
         <MsgSender />

@@ -13,6 +13,7 @@ const Signin = () => {
           className="rounded-md bg-slate-200 px-2 outline-none h-7"
           type="text"
           name="username"
+          required
         />
 
         <label htmlFor="password">
@@ -22,6 +23,7 @@ const Signin = () => {
           className="rounded-md bg-slate-200 px-2 outline-none h-7"
           type="password"
           name="password"
+          required
         />
         <button className="h-8 w-28 bg-blue-600 rounded-lg text-white hover:bg-blue-500 self-center mt-2">
           Signin
