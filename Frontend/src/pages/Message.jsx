@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import MsgUser from "../components/MsgUser";
 import MsgSender from "../components/MsgSender";
+import BackButton from "../components/BackButton.jsx";
 
 const Message = () => {
   return (
@@ -14,12 +15,7 @@ const Message = () => {
         />
         <span className="ml-2">Username</span>
       </div>
-      <Link
-        className="absolute right-3 top-3 text-white font-bold"
-        to={"/login"}
-      >
-        Back
-      </Link>
+      <BackButton link={"login"} />
       <div className="flex-grow flex-col overflow-x-scroll">
         <MsgSender />
         <MsgUser />
