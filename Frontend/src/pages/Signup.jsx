@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import BackButton from "../components/BackButton.jsx";
 
 const Signup = () => {
+  const [userForm, setUserForm] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    age: "",
+    gender: "",
+    avatar: "",
+  });
+  const handleChange = (e) => {
+    const { name, value, checked, type } = e.target;
+    console.log(name, value, checked, type);
+  };
   return (
     <div className="overflow-auto hover:overflow-scroll pt-10 no-scrollbar">
       <BackButton link={""} />
@@ -15,15 +28,20 @@ const Signup = () => {
           type="text"
           name="username"
           required
+          value={userForm.username}
+          onChange={handleChange}
         />
         <label htmlFor="email">
           <span>Email</span>
         </label>
         <input
           required
+          autoComplete="username"
           className="rounded-md bg-slate-200 px-2 outline-none h-7"
           type="email"
           name="email"
+          value={userForm.email}
+          onChange={handleChange}
         />
 
         <label htmlFor="password">
@@ -31,18 +49,24 @@ const Signup = () => {
         </label>
         <input
           required
+          autoComplete="new-password"
           className="rounded-md bg-slate-200 px-2 outline-none h-7"
           type="password"
           name="password"
+          value={userForm.password}
+          onChange={handleChange}
         />
         <label htmlFor="confirmPassword">
           <span>Confirm Password</span>
         </label>
         <input
           required
+          autoComplete="new-password"
           className="rounded-md bg-slate-200 px-2 outline-none h-7"
           type="password"
           name="confirmPassword"
+          value={userForm.confirmPassword}
+          onChange={handleChange}
         />
         <label htmlFor="age">
           <span>Age</span>
@@ -52,6 +76,8 @@ const Signup = () => {
           className="rounded-md bg-slate-200 px-2 outline-none h-7"
           type="number"
           name="age"
+          value={userForm.age}
+          onChange={handleChange}
         />
         <div className="form-control">
           <label className="label cursor-pointer">
@@ -60,6 +86,7 @@ const Signup = () => {
               type="radio"
               name="gender"
               className="radio checked:bg-blue-500"
+              onChange={handleChange}
               defaultChecked
             />
           </label>
@@ -71,6 +98,7 @@ const Signup = () => {
               type="radio"
               name="gender"
               className="radio checked:bg-pink-500"
+              onChange={handleChange}
             />
           </label>
         </div>
@@ -91,6 +119,7 @@ const Signup = () => {
         </button>
       </form>
       <span></span>
+      {console.log(userForm)}
     </div>
   );
 };
