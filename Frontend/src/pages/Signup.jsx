@@ -13,6 +13,7 @@ const Signup = () => {
   });
   const handleChange = (e) => {
     const { name, value, checked, type } = e.target;
+    setUserForm({ ...userForm, [name]: value });
     console.log(name, value, checked, type);
   };
   return (
