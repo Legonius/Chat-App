@@ -32,7 +32,7 @@ const userSchema = new Schema(
       minlength: [8, "password must atleast 8 characters"],
     },
     gender: { type: String, enum: ["Male", "Female"], required: true },
-    avatar: { type: String },
+    avatar: { type: String, default: "avatar" },
   },
   { timestamps: true }
 );

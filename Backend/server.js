@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 import { userRoute } from "./routes/user.routes.js";
 import msgRoute from "./routes/message.routes.js";
 import allUsersRoute from "./routes/allUsers.routes.js";
-
+import cors from "cors";
 dotenv.config();
 
 mongoose
@@ -20,6 +20,11 @@ const PORT = process.env.SERVER_PORT;
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 app.use("/api/user", userRoute);
 app.use("/api/msg", msgRoute);
 app.use("/api/all-users", allUsersRoute);

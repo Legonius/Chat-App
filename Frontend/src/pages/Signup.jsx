@@ -8,19 +8,73 @@ const Signup = () => {
     password: "",
     confirmPassword: "",
     age: "",
-    gender: "",
+    gender: "Male",
     avatar: "",
   });
   const handleChange = (e) => {
     const { name, value, checked, type } = e.target;
-    setUserForm({ ...userForm, [name]: value });
-    console.log(name, value, checked, type);
+    // setUserForm({
+    //   ...userForm,
+    //   [name]: type === "radio" ? (checked ? value : userForm.gender) : value,
+    // });
+    // same with upper one
+    setUserForm((prevForm) => ({
+      ...prevForm,
+      [name]: type === "radio" ? (checked ? value : prevForm.gender) : value,
+    }));
   };
+
+  const signup = async (userForm) => {
+    const { username, email, password, confirmPassword, age, gender, avatar } =
+      userForm;
+    if (
+      !username ||
+      !email ||
+      !password ||
+      !confirmPassword ||
+      !age ||
+      !gender
+    ) {
+      return { message: "Required all Field" };
+    }
+    const userData = {
+      username,
+      email,
+      password,
+      confirmPassword,
+      age,
+      gender,
+      avatar,
+    };
+    const formData = new FormData();
+    formData.append("username", username);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("confirmPassword", confirmPassword);
+    formData.append("age", age);
+    formData.append("gender", gender);
+    formData.append("avatar", avatar);
+    const response = await fetch("http://localhost:15000/api/user/signup", {
+      method: "post",
+      body: formData,
+    });
+    const user = await response.json();
+    console.log(user);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    try {
+      signup(userForm);
+    } catch (error) {
+      console.error("account is not created:", error.message);
+    }
+  };
+
   return (
     <div className="overflow-auto hover:overflow-scroll pt-10 no-scrollbar">
       <BackButton link={""} />
       <p className="mb-3 text-xl font-extrabold ">Signup</p>
-      <form className="flex flex-col gap-1">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-1">
         <label htmlFor="username">
           <span>Username</span>
         </label>
@@ -87,6 +141,7 @@ const Signup = () => {
               type="radio"
               name="gender"
               className="radio checked:bg-blue-500"
+              value={"Male"}
               onChange={handleChange}
               defaultChecked
             />
@@ -98,6 +153,7 @@ const Signup = () => {
             <input
               type="radio"
               name="gender"
+              value={"Female"}
               className="radio checked:bg-pink-500"
               onChange={handleChange}
             />
@@ -109,6 +165,9 @@ const Signup = () => {
         <input
           name="avatar"
           type="file"
+          onChange={(e) =>
+            setUserForm({ ...userForm, avatar: e.target.files[0] })
+          }
           className="file-input file-input-bordered file-input-xs w-full max-w-xs"
         />
 

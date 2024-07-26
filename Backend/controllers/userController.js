@@ -6,6 +6,7 @@ import { errorHandling } from "../utils/error.js";
 // Signup Secssion
 const signup = async (req, res, next) => {
   const { username, email, age, password, confirmPassword, gender } = req.body;
+  console.log(req.file);
 
   const validUser = await userModel.findOne({ username });
   const validEmail = await userModel.findOne({ email });
@@ -34,8 +35,7 @@ const signup = async (req, res, next) => {
   }
   const saltRounds = parseInt(process.env.SALT_ROUNDS);
   const salt = await bcryptjs.genSalt(saltRounds);
-  const hashPassword = bcryptjs.hashSync(password, salt);
-
+  const hashPassword = await bcryptjs.hash(password, 10);
   try {
     const newUser = await userModel.create({
       username,
@@ -43,7 +43,7 @@ const signup = async (req, res, next) => {
       age,
       password: hashPassword,
       gender,
-      avatar: req.file.filename,
+      avatar: req.file ? req.file.filename : "default",
     });
     res.status(202).json(newUser);
   } catch (error) {
