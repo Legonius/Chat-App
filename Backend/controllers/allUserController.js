@@ -15,7 +15,10 @@ export const getAllUsers = async (req, res, next) => {
         .status(404)
         .json({ success: false, message: "users not found" });
     }
-    res.status(201).json(allUsers);
+    res.status(201).json({
+      success: true,
+      data: allUsers,
+    });
   } catch (error) {
     next(error);
   }

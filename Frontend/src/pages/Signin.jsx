@@ -1,18 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import useSigninHook from "../Hooks/SigninHook.js";
 
 const Signin = () => {
+  const { loading, signIn } = useSigninHook();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignin = (e) => {
+    e.preventDefault();
+    signIn(email, password);
+  };
+
   return (
     <div className="text-slate-400 h-[90%] w-[90%] flex flex-col justify-center items-center">
       <p className="mb-3 text-xl font-extrabold ">Welcome!</p>
-      <form className="flex flex-col gap-1">
+      <form onSubmit={handleSignin} className="flex flex-col gap-1">
         <label htmlFor="username">
-          <span>Username</span>
+          <span>Email</span>
         </label>
         <input
           className="rounded-md bg-slate-200 px-2 outline-none h-7"
           type="text"
-          name="username"
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
 
@@ -23,9 +35,13 @@ const Signin = () => {
           className="rounded-md bg-slate-200 px-2 outline-none h-7"
           type="password"
           name="password"
-          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="h-8 w-28 bg-blue-600 rounded-lg text-white hover:bg-blue-500 self-center mt-2">
+        <button
+          disabled={loading}
+          className="h-8 w-28 bg-blue-600 rounded-lg text-white hover:bg-blue-500 self-center mt-2 disabled:bg-blue-300"
+        >
           Signin
         </button>
       </form>
@@ -33,6 +49,7 @@ const Signin = () => {
       <Link className="text-blue-400" to={"/signup"}>
         Create account
       </Link>
+      {loading ? <span className="loading loading-spinner"></span> : ""}
     </div>
   );
 };

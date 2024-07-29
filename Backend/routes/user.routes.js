@@ -1,5 +1,10 @@
 import express from "express";
-import { login, logout, signup } from "../controllers/userController.js";
+import {
+  fingUser,
+  login,
+  logout,
+  signup,
+} from "../controllers/userController.js";
 import { checkAuthen } from "../middlewares/checkAuthentication.js";
 import multer from "multer";
 import fs from "fs";
@@ -28,5 +33,6 @@ const userRoute = express.Router();
 userRoute.post("/signup", upload.single("avatar"), signup);
 userRoute.post("/login", login);
 userRoute.get("/logout", checkAuthen, logout);
+userRoute.get("/findUser/:id", checkAuthen, fingUser);
 
 export { userRoute };

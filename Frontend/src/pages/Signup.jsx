@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import BackButton from "../components/BackButton.jsx";
+import { useSignup } from "../Hooks/AuthHook.js";
 
 const Signup = () => {
+  const { loading, signup } = useSignup();
   const [userForm, setUserForm] = useState({
     username: "",
     email: "",
@@ -24,47 +26,10 @@ const Signup = () => {
     }));
   };
 
-  const signup = async (userForm) => {
-    const { username, email, password, confirmPassword, age, gender, avatar } =
-      userForm;
-    if (
-      !username ||
-      !email ||
-      !password ||
-      !confirmPassword ||
-      !age ||
-      !gender
-    ) {
-      return { message: "Required all Field" };
-    }
-    const userData = {
-      username,
-      email,
-      password,
-      confirmPassword,
-      age,
-      gender,
-      avatar,
-    };
-    const formData = new FormData();
-    formData.append("username", username);
-    formData.append("email", email);
-    formData.append("password", password);
-    formData.append("confirmPassword", confirmPassword);
-    formData.append("age", age);
-    formData.append("gender", gender);
-    formData.append("avatar", avatar);
-    const response = await fetch("http://localhost:15000/api/user/signup", {
-      method: "post",
-      body: formData,
-    });
-    const user = await response.json();
-    console.log(user);
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      signup(userForm);
+      signup(userForm, setUserForm);
     } catch (error) {
       console.error("account is not created:", error.message);
     }
@@ -179,7 +144,6 @@ const Signup = () => {
         </button>
       </form>
       <span></span>
-      {console.log(userForm)}
     </div>
   );
 };

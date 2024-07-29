@@ -6,7 +6,6 @@ import { errorHandling } from "../utils/error.js";
 // Signup Secssion
 const signup = async (req, res, next) => {
   const { username, email, age, password, confirmPassword, gender } = req.body;
-  console.log(req.file);
 
   const validUser = await userModel.findOne({ username });
   const validEmail = await userModel.findOne({ email });
@@ -45,7 +44,14 @@ const signup = async (req, res, next) => {
       gender,
       avatar: req.file ? req.file.filename : "default",
     });
-    res.status(202).json(newUser);
+    res.status(202).json({
+      success: true,
+      username: newUser.username,
+      email: newUser.email,
+      _id: newUser._id,
+      avatar: newUser.avatar,
+      gender: newUser.gender,
+    });
   } catch (error) {
     res.status(400).json({ error: error.message });
     return next(errorHandling(400, error.message));
@@ -58,8 +64,9 @@ const login = async (req, res, next) => {
     if (req.cookie?.uid) {
       res.clearCookie("uid");
     }
-    const { username, password } = req.body;
-    const user = await userModel.findOne({ username });
+    const { email, password } = req.body;
+    const user = await userModel.findOne({ email });
+
     if (!user) {
       return next(errorHandling(404, "User doesn't exist"));
     }
@@ -68,7 +75,7 @@ const login = async (req, res, next) => {
       return next(errorHandling(401, "Incorrect Password"));
     }
     const token = jwt.sign(
-      { username, email: user.email },
+      { username: user.username, email: user.email },
       process.env.JWT_CODE
     );
     const oneHour = 3600000;
@@ -78,7 +85,16 @@ const login = async (req, res, next) => {
       secure: true,
       sameSite: true,
     });
-    res.status(201).json({ login: "success" });
+    res.status(201).json({
+      success: true,
+      data: {
+        username: user.username,
+        email: user.email,
+        avatar: user.avatar,
+        gender: user.gender,
+        age: user.age,
+      },
+    });
     next();
   } catch (error) {
     next(error);
@@ -93,6 +109,7 @@ const logout = async (req, res, next) => {
     }
     res.clearCookie("uid");
     res.status(200).json({
+      success: true,
       message: "User logout successfully",
     });
   } catch (error) {
@@ -100,4 +117,17 @@ const logout = async (req, res, next) => {
   }
   next("logout");
 };
-export { signup, login, logout };
+const fingUser = async (req, res, next) => {
+  const id = req.params.id;
+  if (!id) {
+    return next(errorHandling(404, "User not found"));
+  }
+  try {
+    const data = await userModel.findOne({ _id: id });
+    res.status(200).json({ success: true, data });
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
+export { signup, login, logout, fingUser };

@@ -1,45 +1,47 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import MsgUser from "../components/MsgUser";
 import MsgSender from "../components/MsgSender";
 import BackButton from "../components/BackButton.jsx";
+import { useParams } from "react-router-dom";
+import useMessageHook from "../Hooks/MessageHook.js";
+import toast from "react-hot-toast";
+import Conversations from "../components/Conversations.jsx";
+import SendMsg from "../components/SendMsg.jsx";
 
 const Message = () => {
+  const { oppositeChatId } = useParams();
+  const { loading, findFriend } = useMessageHook();
+  const [opppositeData, setOppositeData] = useState({});
+
+  useEffect(() => {
+    const fectData = async (id) => {
+      const data = await findFriend(id);
+      if (data.success) {
+        setOppositeData(data.data);
+      } else {
+        toast.error("Error fetching data");
+      }
+    };
+    fectData(oppositeChatId);
+  }, [oppositeChatId]);
   return (
     <div className="h-full w-full flex flex-col pt-10 justify-between no-scrollbar">
       <div className="absolute w-full top-0 left-0 h-12 bg-slate-400 rounded-t-lg text-slate-50 font-extrabold text-xl flex items-center justify-start px-2">
         <img
-          className="h-8 bg-cover rounded-full"
-          src="../../public/avatar.jpeg"
-          alt="profile pic"
+          className="h-8 w-8 bg-cover rounded-full"
+          src={
+            opppositeData.avatar === "default"
+              ? `../../public/${opppositeData.gender}.jpeg`
+              : `http://localhost:15000/public/images/${opppositeData.avatar}`
+          }
         />
-        <span className="ml-2">Username</span>
+        <span className="ml-2">{opppositeData.username}</span>
       </div>
       <BackButton link={"login"} />
       <div className="flex-grow flex-col overflow-x-scroll no-scrollbar">
-        <MsgSender />
-        <MsgUser />
-        <MsgSender />
-        <MsgUser />
-        <MsgSender />
-        <MsgUser />
-        <MsgSender />
-        <MsgUser />
-        <MsgSender />
-        <MsgUser />
-        <MsgSender />
-        <MsgUser />
+        <Conversations />
       </div>
-      <form className="flex w-full h-12 items-center gap-1">
-        <input
-          className="flex-grow p-2 bg-slate-100 rounded-lg h-8"
-          type="text"
-          placeholder="type message"
-        ></input>
-        <button className="h-8 px-1 bg-gray-500 text-white rounded-lg">
-          send
-        </button>
-      </form>
+      <SendMsg />
     </div>
   );
 };

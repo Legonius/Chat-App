@@ -7,6 +7,7 @@ import { userRoute } from "./routes/user.routes.js";
 import msgRoute from "./routes/message.routes.js";
 import allUsersRoute from "./routes/allUsers.routes.js";
 import cors from "cors";
+import path from "path";
 dotenv.config();
 
 mongoose
@@ -23,8 +24,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
     origin: "http://localhost:5173",
+    // allowedHeaders: "Content-Type",
   })
 );
+app.use("/public", express.static(path.resolve("public")));
 app.use("/api/user", userRoute);
 app.use("/api/msg", msgRoute);
 app.use("/api/all-users", allUsersRoute);
@@ -39,7 +42,7 @@ app.use((err, req, res, next) => {
   const message = err.message || "Internal server error";
 
   return res.status(statusCode).json({
-    success: "false",
+    success: false,
     statusCode,
     message,
   });
