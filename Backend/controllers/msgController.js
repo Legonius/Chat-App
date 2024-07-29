@@ -1,6 +1,7 @@
 import conversationModel from "../models/conversationModel.js";
 import messageModel from "../models/messageModel.js";
 import mongoose from "mongoose";
+import { errorHandling } from "../utils/error.js";
 
 const msgSend = async (req, res, next) => {
   //   const session = await mongoose.startSession();
@@ -45,15 +46,19 @@ const getMsg = async (req, res, next) => {
   const { id: otherUser } = req.params;
   const userId = req.user._id;
 
-  const conversation = await conversationModel
-    .findOne({
-      participants: { $all: [otherUser, userId] },
-    })
-    .populate("messages");
-  if (!conversation) {
-    return res.status(201).json([]);
+  try {
+    const conversation = await conversationModel
+      .findOne({
+        participants: { $all: [otherUser, userId] },
+      })
+      .populate("messages");
+    if (!conversation) {
+      return errorHandling(404, "can't get data");
+    }
+    res.status(201).json({ success: true, data: conversation.messages });
+  } catch (error) {
+    errorHandling(500, error.message);
   }
-  res.status(201).json(conversation.messages);
 };
 
 export { msgSend, getMsg };

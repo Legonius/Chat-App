@@ -10,7 +10,7 @@ const Login = () => {
   const { allUserData } = useAuthContext();
   useEffect(() => {
     getUsers();
-  }, [allUserData]);
+  }, []);
 
   return (
     <div className="overflow-y-scroll w-full h-full pt-10 ">

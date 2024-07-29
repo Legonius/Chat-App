@@ -8,10 +8,17 @@ const useConversationHook = () => {
 
   const getConversation = async (id) => {
     try {
+      console.log("in");
       setLoading(true);
-      const fetch = await fetch(`/api/msg/${id}`);
-      const data = await fetch.json();
-      setConversations(data);
+      const response = await fetch(`http://localhost:15000/api/msg/${id}`);
+      console.log(response);
+      const data = await response.json();
+      console.log(data);
+      if (data.success) {
+        return setConversations(data);
+      } else {
+        toast.error("Can't get Conversations");
+      }
     } catch (error) {
       console.log(error.message);
       toast.error("Conversation Loading Error");
@@ -19,7 +26,7 @@ const useConversationHook = () => {
       setLoading(false);
     }
   };
-  return { loading, setConversations };
+  return { loading, getConversation };
 };
 
 export default useConversationHook;

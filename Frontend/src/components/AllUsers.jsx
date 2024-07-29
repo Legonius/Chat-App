@@ -10,7 +10,7 @@ const AllUsers = ({ data }) => {
           className=" max-h-12 w-12 bg-cover rounded-full"
           src={
             data.avatar === "default"
-              ? `../../public/${data.gender}.jpeg`
+              ? `/${data.gender}.jpeg`
               : `http://localhost:15000/public/images/${data.avatar}`
           }
           alt="profile pic"
