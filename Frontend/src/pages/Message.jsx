@@ -39,7 +39,7 @@ const Message = () => {
       </div>
       <BackButton link={"login"} />
       <div className="flex-grow flex-col overflow-x-scroll no-scrollbar">
-        <Conversations />
+        <Conversations receiver={opppositeData} />
       </div>
       <SendMsg />
     </div>

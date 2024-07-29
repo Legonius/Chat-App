@@ -1,8 +1,12 @@
 import React from "react";
 import MsgSender from "./MsgSender";
 import MsgUser from "./MsgUser";
+import { useState, useEffect } from "react";
 
-const Conversations = () => {
+const Conversations = ({ receiver }) => {
+  useEffect(() => {
+    console.log(receiver);
+  }, [receiver._id]);
   return (
     <div>
       <MsgSender />

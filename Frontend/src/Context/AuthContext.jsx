@@ -9,9 +9,17 @@ export const useAuthContext = () => {
 export default function ContextProvider({ children }) {
   const [userData, setUserData] = useState(null);
   const [allUserData, setAllUserData] = useState([]);
+  const [conversations, setConversations] = useState([]);
   return (
     <authContext.Provider
-      value={{ setUserData, userData, allUserData, setAllUserData }}
+      value={{
+        setUserData,
+        userData,
+        allUserData,
+        setAllUserData,
+        conversations,
+        setConversations,
+      }}
     >
       {children}
     </authContext.Provider>
