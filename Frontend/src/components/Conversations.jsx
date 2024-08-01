@@ -10,13 +10,13 @@ const Conversations = ({ receiver }) => {
   const { loading, getConversation } = useConversationHook();
   useEffect(() => {
     // if (receiver._id) {
-    const fetch = async (id) => {
-      const result = await getConversation(id);
-      console.log("conversation:", result);
-    };
-    fetch(receiver._id);
+    // const fetch = async (id) => {
+    //   const result = await getConversation(id);
+    //   console.log("conversation:", result);
+    // };
+    // fetch(receiver._id);
     // }
-  }, [receiver._id]);
+  }, []);
   return (
     <div>
       <MsgSender />

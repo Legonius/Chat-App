@@ -1,8 +1,11 @@
 import React from "react";
 
-const SendMsg = () => {
+const SendMsg = ({ receiver }) => {
+  const handleChat = (e) => {
+    e.preventDefault();
+  };
   return (
-    <form className="flex w-full h-12 items-center gap-1">
+    <form onSubmit={handleChat} className="flex w-full h-12 items-center gap-1">
       <input
         className="flex-grow p-2 bg-slate-100 rounded-lg h-8"
         type="text"
