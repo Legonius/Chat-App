@@ -54,7 +54,7 @@ const getMsg = async (req, res, next) => {
     if (!conversation) {
       return errorHandling(404, "can't get data");
     }
-    res.status(201).json({ success: true, data: conversation.messages });
+    res.status(200).json({ success: true, data: conversation.messages });
   } catch (error) {
     errorHandling(500, error.message);
   }

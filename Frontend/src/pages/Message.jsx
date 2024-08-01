@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import MsgUser from "../components/MsgUser";
 import MsgSender from "../components/MsgSender";
 import BackButton from "../components/BackButton.jsx";
@@ -11,20 +11,18 @@ import SendMsg from "../components/SendMsg.jsx";
 const Message = () => {
   const { oppositeChatId } = useParams();
   console.log("oppositeChatId:", oppositeChatId);
-  const { loading, findFriend } = useMessageHook();
+  const { setLoading, loading, findFriend } = useMessageHook();
   const [oppositeData, setOppositeData] = useState({});
 
   useEffect(() => {
-    const fectData = async (id) => {
-      const data = await findFriend(id);
-      if (data.success) {
-        setOppositeData(data.data);
-      } else {
-        toast.error("Error fetching data");
-      }
+    const getOpsData = async (id) => {
+      const res = await findFriend(id);
+      console.log("res:", res);
+      setOppositeData(res);
+      setLoading(false);
     };
-    fectData(oppositeChatId);
-  }, [oppositeChatId]);
+    if (oppositeChatId) getOpsData(oppositeChatId);
+  }, []);
   return (
     <div className="h-full w-full flex flex-col pt-10 justify-between no-scrollbar">
       <div className="absolute w-full top-0 left-0 h-12 bg-slate-400 rounded-t-lg text-slate-50 font-extrabold text-xl flex items-center justify-start px-2">
