@@ -8,7 +8,6 @@ const useConversationHook = () => {
 
   const getConversation = async (id) => {
     try {
-      console.log("dive getConversation");
       setLoading(true);
       const response = await fetch(`http://localhost:15000/api/msg/${id}`, {
         method: "get",

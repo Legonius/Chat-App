@@ -6,31 +6,27 @@ import { useAuthContext } from "../Context/AuthContext";
 import useConversationHook from "../Hooks/ConversationHook";
 
 const Conversations = ({ receiver }) => {
-  console.log("receeiver:", receiver);
   const { loading, getConversation } = useConversationHook();
+  const [conversations, setConversations] = useState([]);
   useEffect(() => {
-    // if (receiver._id) {
-    // const fetch = async (id) => {
-    //   const result = await getConversation(id);
-    //   console.log("conversation:", result);
-    // };
-    // fetch(receiver._id);
-    // }
-  }, []);
+    if (receiver._id) {
+      const fetch = async (id) => {
+        const result = await getConversation(id);
+        console.log("conversation:", result);
+        setConversations(result.data);
+      };
+      fetch(receiver._id);
+    }
+  }, [receiver]);
   return (
     <div>
-      <MsgSender />
-      <MsgUser />
-      <MsgSender />
-      <MsgUser />
-      <MsgSender />
-      <MsgUser />
-      <MsgSender />
-      <MsgUser />
-      <MsgSender />
-      <MsgUser />
-      <MsgSender />
-      <MsgUser />
+      {conversations.map((conversataion) => (
+        <MsgSender
+          key={conversataion._id}
+          message={conversataion}
+          otherId={receiver._id}
+        />
+      ))}
     </div>
   );
 };

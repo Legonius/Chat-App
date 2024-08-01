@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 const useLogout = () => {
   const { setUserData, userData } = useAuthContext();
   const [loading, setLoading] = useState(false);
+  const { setAllUserData } = useAuthContext();
 
   const logout = async () => {
     setLoading(true);
@@ -21,6 +22,7 @@ const useLogout = () => {
       if (data.success) {
         // localStorage.removeItem("chat-app-user");
         setUserData(null);
+        setAllUserData([]);
         toast.success("Logout Seccessfully.");
       }
     } catch (error) {

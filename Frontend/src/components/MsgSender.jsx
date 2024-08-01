@@ -1,8 +1,12 @@
 import React from "react";
 
-const MsgSender = () => {
+const MsgSender = ({ message, otherId }) => {
   return (
-    <div className="chat chat-start">
+    <div
+      className={`chat ${
+        message.receiverId === otherId ? "chat-end" : "chat-start"
+      }`}
+    >
       <div className="chat-image avatar">
         <div className="w-10 rounded-full">
           <img
@@ -11,9 +15,7 @@ const MsgSender = () => {
           />
         </div>
       </div>
-      <div className="chat-bubble">
-        It was said that you would, destroy the Sith, not join them.
-      </div>
+      <div className="chat-bubble">{message.message}</div>
     </div>
   );
 };
