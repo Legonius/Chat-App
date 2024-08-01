@@ -45,7 +45,6 @@ const msgSend = async (req, res, next) => {
 const getMsg = async (req, res, next) => {
   try {
     const { id: otherUser } = req.params;
-    console.log(req.user);
     const userId = req.user._id;
     const conversation = await conversationModel
       .findOne({

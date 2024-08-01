@@ -7,16 +7,15 @@ import useConversationHook from "../Hooks/ConversationHook";
 
 const Conversations = ({ receiver }) => {
   console.log("receeiver:", receiver);
-  const { conversations: allMsg } = useAuthContext();
   const { loading, getConversation } = useConversationHook();
   useEffect(() => {
+    // if (receiver._id) {
     const fetch = async () => {
       await getConversation(receiver._id);
-      console.log("receiver_id:", receiver._id);
-      console.log("allMsg:", allMsg);
+      console.log("conversation:", fetch());
     };
-    fetch();
-  }, []);
+    // }
+  }, [receiver]);
   return (
     <div>
       <MsgSender />

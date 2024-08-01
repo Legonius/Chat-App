@@ -116,15 +116,15 @@ const logout = async (req, res, next) => {
     next(error);
   }
 };
+// Find user
 const fingUser = async (req, res, next) => {
   const id = req.params.id;
   if (!id) {
     return next(errorHandling(404, "User not found"));
   }
   try {
-    const data = await userModel.findOne({ _id: id });
+    const data = await userModel.findOne({ _id: id }, "-password");
     res.status(200).json({ success: true, data });
-    next();
   } catch (error) {
     next(error);
   }

@@ -10,7 +10,7 @@ import SendMsg from "../components/SendMsg.jsx";
 
 const Message = () => {
   const { oppositeChatId } = useParams();
-  console.log(oppositeChatId);
+  console.log("oppositeChatId:", oppositeChatId);
   const { loading, findFriend } = useMessageHook();
   const [oppositeData, setOppositeData] = useState({});
 
@@ -24,7 +24,7 @@ const Message = () => {
       }
     };
     fectData(oppositeChatId);
-  }, []);
+  }, [oppositeChatId]);
   return (
     <div className="h-full w-full flex flex-col pt-10 justify-between no-scrollbar">
       <div className="absolute w-full top-0 left-0 h-12 bg-slate-400 rounded-t-lg text-slate-50 font-extrabold text-xl flex items-center justify-start px-2">

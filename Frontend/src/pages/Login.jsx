@@ -8,8 +8,11 @@ const Login = () => {
   const { loading, logout } = useLogout();
   const { loading1, getUsers } = useAllUserHook();
   const { allUserData } = useAuthContext();
+
   useEffect(() => {
-    getUsers();
+    if (allUserData.length < 1) {
+      getUsers();
+    }
   }, []);
 
   return (
