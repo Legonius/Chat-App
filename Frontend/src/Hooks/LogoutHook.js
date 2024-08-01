@@ -12,7 +12,11 @@ const useLogout = () => {
       if (!userData) {
         return toast.error("You're not loggin!");
       }
-      const response = await fetch("/api/user/logout");
+      const response = await fetch("http://localhost:15000/api/user/logout", {
+        method: "get",
+        headers: { "Content-type": "application/json" },
+        credentials: "include",
+      });
       const data = await response.json();
       if (data.success) {
         // localStorage.removeItem("chat-app-user");

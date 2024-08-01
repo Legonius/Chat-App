@@ -43,10 +43,10 @@ const msgSend = async (req, res, next) => {
 };
 
 const getMsg = async (req, res, next) => {
-  const { id: otherUser } = req.params;
-  const userId = req.user._id;
-
   try {
+    const { id: otherUser } = req.params;
+    console.log(req.user);
+    const userId = req.user._id;
     const conversation = await conversationModel
       .findOne({
         participants: { $all: [otherUser, userId] },

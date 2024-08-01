@@ -20,11 +20,13 @@ const PORT = process.env.SERVER_PORT;
 
 app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: "http://localhost:5173",
-    // allowedHeaders: "Content-Type",
+    credentials: true, // Allow credentials (cookies) to be sent
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: "Content-Type,Authorization",
   })
 );
 app.use("/public", express.static(path.resolve("public")));

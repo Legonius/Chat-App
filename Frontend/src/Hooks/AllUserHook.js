@@ -9,7 +9,10 @@ const useAllUserHook = () => {
   const getUsers = async () => {
     try {
       setLoading1(true);
-      const data = await fetch("/api/all-users");
+      const data = await fetch("http://localhost:15000/api/all-users", {
+        method: "get",
+        credentials: "include",
+      });
       const allUsers = await data.json();
       if (!allUsers.success) {
         return toast.error("Users not found");

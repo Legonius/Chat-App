@@ -61,8 +61,10 @@ const signup = async (req, res, next) => {
 //Login Secssion
 const login = async (req, res, next) => {
   try {
-    if (req.cookie?.uid) {
-      res.clearCookie("uid");
+    if (req.cookies?.uid) {
+      console.log("some Cookie when login");
+      // res.clearCookie("uid");
+      // next();
     }
     const { email, password } = req.body;
     const user = await userModel.findOne({ email });
@@ -80,12 +82,11 @@ const login = async (req, res, next) => {
     );
     const oneHour = 3600000;
     res.cookie("uid", token, {
-      maxAge: oneHour,
       httpOnly: true,
-      secure: true,
-      sameSite: true,
+      secure: false,
+      maxAge: oneHour,
     });
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       data: {
         username: user.username,
@@ -95,7 +96,6 @@ const login = async (req, res, next) => {
         age: user.age,
       },
     });
-    next();
   } catch (error) {
     next(error);
   }
@@ -115,7 +115,6 @@ const logout = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-  next("logout");
 };
 const fingUser = async (req, res, next) => {
   const id = req.params.id;
@@ -131,3 +130,9 @@ const fingUser = async (req, res, next) => {
   }
 };
 export { signup, login, logout, fingUser };
+
+{
+  // httpOnly: true,
+  // secure: true,
+  // sameSite: true,
+}

@@ -10,6 +10,7 @@ import SendMsg from "../components/SendMsg.jsx";
 
 const Message = () => {
   const { oppositeChatId } = useParams();
+  console.log(oppositeChatId);
   const { loading, findFriend } = useMessageHook();
   const [oppositeData, setOppositeData] = useState({});
 

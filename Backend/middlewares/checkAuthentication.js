@@ -6,7 +6,7 @@ export const checkAuthen = async (req, res, next) => {
   try {
     const token = req.cookies?.uid;
     if (!token) {
-      console.log("No Token");
+      console.log("No Token:", token);
       return next();
     }
     const payload = jwt.verify(token, process.env.JWT_CODE);

@@ -22,19 +22,21 @@ const useSigninHook = () => {
     const data = JSON.stringify({ email, password });
     try {
       setLoading(true);
-      const response = await fetch("api/user/login", {
+      const response = await fetch("http://localhost:15000/api/user/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: data,
+        credentials: "include", // Include credentials in the request
       });
       const getUserData = await response.json();
+      console.log("getUserData:", getUserData);
 
       if (!getUserData.success) {
         return toast.error(getUserData.message);
       } else {
         toast.success("Login Successfully!");
         // localStorage.setItem("chat-app-user", JSON.stringify(getUserData.data));
-        setUserData(getUserData);
+        setUserData(getUserData.data);
       }
     } catch (error) {
       console.log(error.message);

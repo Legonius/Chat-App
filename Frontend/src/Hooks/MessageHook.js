@@ -7,7 +7,9 @@ const useMessageHook = () => {
   const findFriend = async (id) => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/user/findUser/${id}`);
+      const response = await fetch(
+        `http://localhost:15000/api/user/findUser/${id}`
+      );
       const data = await response.json();
       if (data.success) {
         return data;

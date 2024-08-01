@@ -6,6 +6,7 @@ import { useAuthContext } from "../Context/AuthContext";
 import useConversationHook from "../Hooks/ConversationHook";
 
 const Conversations = ({ receiver }) => {
+  console.log("receeiver:", receiver);
   const { conversations: allMsg } = useAuthContext();
   const { loading, getConversation } = useConversationHook();
   useEffect(() => {
