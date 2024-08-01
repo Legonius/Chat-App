@@ -29,7 +29,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 const userRoute = express.Router();
-// userRoute.use(checkAuthen);
+// app.use("/api/user", userRoute);
 userRoute.post("/signup", upload.single("avatar"), signup);
 userRoute.post("/login", login);
 userRoute.get("/logout", checkAuthen, logout);

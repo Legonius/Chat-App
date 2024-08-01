@@ -10,7 +10,9 @@ const msgSend = async (req, res, next) => {
     const senderId = req.user._id;
     const { id: receiverId } = req.params;
     const { message } = req.body;
-
+    if (!message) {
+      next(errorHandling(401, "Mesagge not found."));
+    }
     let conversation = await conversationModel.findOne({
       participants: { $all: [senderId, receiverId] },
     });
@@ -38,7 +40,7 @@ const msgSend = async (req, res, next) => {
   } catch (error) {
     // session.abortTransaction();
     // session.endSession();
-    next(error);
+    // res.status(400).json({ success: false, message: error.message });
   }
 };
 

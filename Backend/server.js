@@ -29,6 +29,22 @@ app.use(
     allowedHeaders: "Content-Type,Authorization",
   })
 );
+// additional setting to use if needed
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "http://localhost:5173");
+//   res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+//   );
+//   res.header("Access-Control-Allow-Credentials", "true");
+//   if (req.method === "OPTIONS") {
+//     res.sendStatus(200);
+//   } else {
+//     next();
+//   }
+// });
+
 app.use("/public", express.static(path.resolve("public")));
 app.use("/api/user", userRoute);
 app.use("/api/msg", msgRoute);

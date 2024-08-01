@@ -12,12 +12,14 @@ const useSendMsgHook = () => {
         {
           method: "post",
           credentials: "include",
-          body: { message },
+          secure: false,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message }),
         }
       );
       const msgData = await response.json();
-      console.log(msgData);
-      return msgData;
+      console.log("message for send:", msgData);
+      return msgData.success;
     } catch (error) {
       console.log(error.message);
     } finally {
@@ -25,7 +27,7 @@ const useSendMsgHook = () => {
     }
   };
 
-  return { loading, msgSend };
+  return { loading, setLoading, sendMsg };
 };
 
 export default useSendMsgHook;
