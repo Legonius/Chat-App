@@ -24,7 +24,7 @@ const Conversations = ({ receiver }) => {
         <MsgSender
           key={conversataion._id}
           message={conversataion}
-          otherId={receiver._id}
+          other={receiver}
         />
       ))}
     </div>

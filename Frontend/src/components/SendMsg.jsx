@@ -8,7 +8,6 @@ const SendMsg = ({ receiver }) => {
   const fetch = async (id, msg) => {
     const message = await sendMsg(id, msg);
     if (message) {
-      console.log("msg just send");
       setUserMessage("");
     } else {
       toast.error("Msg not send!");

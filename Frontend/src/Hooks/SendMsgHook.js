@@ -6,6 +6,7 @@ const useSendMsgHook = () => {
 
   const sendMsg = async (id, message) => {
     try {
+      if (!message) return true;
       setLoading(true);
       const response = await fetch(
         `http://localhost:15000/api/msg/send/${id}`,
