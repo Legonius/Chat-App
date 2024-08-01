@@ -10,7 +10,10 @@ const useConversationHook = () => {
     try {
       console.log("in");
       setLoading(true);
-      const response = await fetch(`http://localhost:15000/api/msg/${id}`);
+      const response = await fetch(`http://localhost:15000/api/msg/${id}`, {
+        method: "get",
+        credentials: "include",
+      });
       console.log(response);
       const data = await response.json();
       console.log(data);

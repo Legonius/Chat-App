@@ -8,7 +8,11 @@ const useMessageHook = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:15000/api/user/findUser/${id}`
+        `http://localhost:15000/api/user/findUser/${id}`,
+        {
+          method: "get",
+          credentials: "include",
+        }
       );
       const data = await response.json();
       if (data.success) {

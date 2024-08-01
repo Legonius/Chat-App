@@ -12,8 +12,8 @@ const Conversations = ({ receiver }) => {
   useEffect(() => {
     const fetch = async () => {
       await getConversation(receiver._id);
-      console.log(receiver._id);
-      console.log(allMsg);
+      console.log("receiver_id:", receiver._id);
+      console.log("allMsg:", allMsg);
     };
     fetch();
   }, []);
