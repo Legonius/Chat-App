@@ -1,10 +1,7 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import MsgUser from "../components/MsgUser";
-import MsgSender from "../components/MsgSender";
+import React, { useEffect, useState } from "react";
 import BackButton from "../components/BackButton.jsx";
 import { useParams } from "react-router-dom";
 import useMessageHook from "../Hooks/MessageHook.js";
-import toast from "react-hot-toast";
 import Conversations from "../components/Conversations.jsx";
 import SendMsg from "../components/SendMsg.jsx";
 

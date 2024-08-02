@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { msgSend } from "../../../Backend/controllers/msgController";
+import { useAuthContext } from "../Context/AuthContext";
 
 const useSendMsgHook = () => {
   const [loading, setLoading] = useState(false);
+  const { conversations, setConversations } = useAuthContext();
 
   const sendMsg = async (id, message) => {
     try {
@@ -19,7 +21,7 @@ const useSendMsgHook = () => {
         }
       );
       const msgData = await response.json();
-      console.log("message for send:", msgData);
+      setConversations([...conversations, msgData.newMessage]);
       return msgData.success;
     } catch (error) {
       console.log(error.message);

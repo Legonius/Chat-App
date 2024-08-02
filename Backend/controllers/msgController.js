@@ -54,7 +54,8 @@ const getMsg = async (req, res, next) => {
       })
       .populate("messages");
     if (!conversation) {
-      return errorHandling(404, "can't get data");
+      res.status(200).json({ success: true, data: [] });
+      return;
     }
     res.status(200).json({ success: true, data: conversation.messages });
   } catch (error) {

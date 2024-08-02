@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { useAuthContext } from "../Context/AuthContext";
 import toast from "react-hot-toast";
 
 const useConversationHook = () => {
-  const { setConversations } = useAuthContext();
   const [loading, setLoading] = useState(false);
 
   const getConversation = async (id) => {
@@ -14,6 +12,7 @@ const useConversationHook = () => {
         credentials: "include",
       });
       const data = await response.json();
+      console.log(data);
       if (data.success) {
         return data;
       } else {

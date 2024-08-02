@@ -1,13 +1,13 @@
 import React from "react";
-import MsgSender from "./MsgSender";
-import MsgUser from "./MsgUser";
 import { useState, useEffect } from "react";
 import { useAuthContext } from "../Context/AuthContext";
 import useConversationHook from "../Hooks/ConversationHook";
+import MsgBoxes from "./MsgBoxes";
+import MsgDefault from "./MsgDefault";
 
 const Conversations = ({ receiver }) => {
   const { loading, getConversation } = useConversationHook();
-  const [conversations, setConversations] = useState([]);
+  const { conversations, setConversations } = useAuthContext();
   useEffect(() => {
     if (receiver._id) {
       const fetch = async (id) => {
@@ -20,13 +20,18 @@ const Conversations = ({ receiver }) => {
   }, [receiver]);
   return (
     <div>
-      {conversations.map((conversataion) => (
-        <MsgSender
-          key={conversataion._id}
-          message={conversataion}
-          other={receiver}
-        />
-      ))}
+      {loading ? (
+        <span className="loading loading-spinner"></span>
+      ) : (
+        conversations.map((conversation) => (
+          <MsgBoxes
+            key={conversation._id}
+            message={conversation}
+            other={receiver}
+          />
+        ))
+      )}
+      {!loading && conversations.length < 1 && <MsgDefault />}
     </div>
   );
 };
