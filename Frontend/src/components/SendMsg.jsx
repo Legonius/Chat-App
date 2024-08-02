@@ -20,9 +20,12 @@ const SendMsg = ({ receiver }) => {
   };
 
   return (
-    <form onSubmit={handleChat} className="flex w-full h-12 items-center gap-1">
+    <form
+      onSubmit={handleChat}
+      className="flex w-full h-12 items-center gap-1 mt-2"
+    >
       <input
-        className="flex-grow p-2 bg-slate-100 rounded-lg h-8"
+        className="flex-grow p-2 bg-slate-100 rounded-lg h-8 outline-none"
         type="text"
         placeholder="type message"
         value={userMessage}

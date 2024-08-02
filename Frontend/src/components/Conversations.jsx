@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useState, useEffect } from "react";
 import { useAuthContext } from "../Context/AuthContext";
 import useConversationHook from "../Hooks/ConversationHook";
@@ -8,6 +8,7 @@ import MsgDefault from "./MsgDefault";
 const Conversations = ({ receiver }) => {
   const { loading, getConversation } = useConversationHook();
   const { conversations, setConversations } = useAuthContext();
+  const msgEndRef = useRef("");
   useEffect(() => {
     if (receiver._id) {
       const fetch = async (id) => {
@@ -18,6 +19,11 @@ const Conversations = ({ receiver }) => {
       fetch(receiver._id);
     }
   }, [receiver]);
+  useEffect(() => {
+    if (msgEndRef.current) {
+      msgEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [conversations]);
   return (
     <div>
       {loading ? (
@@ -32,6 +38,7 @@ const Conversations = ({ receiver }) => {
         ))
       )}
       {!loading && conversations.length < 1 && <MsgDefault />}
+      <div ref={msgEndRef} />
     </div>
   );
 };
