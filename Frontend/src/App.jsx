@@ -5,10 +5,13 @@ import { Route, Routes } from "react-router-dom";
 import Signup from "./pages/Signup";
 import { Toaster } from "react-hot-toast";
 import { useAuthContext } from "./Context/AuthContext";
+import { useSocketContext } from "./Context/SocketContext.jsx";
 import { Navigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function App() {
   const { userData } = useAuthContext();
+
   return (
     <>
       <div className="overflow-x-scroll flex justify-center items-center h-screen bg-slate-500">
