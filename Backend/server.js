@@ -1,6 +1,5 @@
 import express from "express";
 import cookieParser from "cookie-parser";
-import { createServer } from "http";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { userRoute } from "./routes/user.routes.js";
@@ -8,6 +7,7 @@ import msgRoute from "./routes/message.routes.js";
 import allUsersRoute from "./routes/allUsers.routes.js";
 import cors from "cors";
 import path from "path";
+import { app, server } from "./socket.js";
 dotenv.config();
 
 mongoose
@@ -15,7 +15,6 @@ mongoose
   .then(() => console.log("MongoDB is connected"))
   .catch((err) => console.log("Mongodb connection error: ", err));
 
-const app = express();
 const PORT = process.env.SERVER_PORT;
 
 const corsOptions = {
@@ -50,7 +49,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () =>
+server.listen(PORT, () =>
   console.log(`Server is running at http://localhost:${PORT}`)
 );
 
