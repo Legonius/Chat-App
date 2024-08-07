@@ -56,7 +56,7 @@ const Signup = () => {
         </label>
         <input
           required
-          autoComplete="username"
+          autoComplete="off"
           className="rounded-md bg-slate-200 px-2 outline-none h-7"
           type="email"
           name="email"
@@ -69,7 +69,7 @@ const Signup = () => {
         </label>
         <input
           required
-          autoComplete="new-password"
+          autoComplete="off"
           className="rounded-md bg-slate-200 px-2 outline-none h-7"
           type="password"
           name="password"
@@ -81,7 +81,7 @@ const Signup = () => {
         </label>
         <input
           required
-          autoComplete="new-password"
+          autoComplete="off"
           className="rounded-md bg-slate-200 px-2 outline-none h-7"
           type="password"
           name="confirmPassword"
