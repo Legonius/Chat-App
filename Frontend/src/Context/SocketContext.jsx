@@ -15,6 +15,11 @@ const SocketContextProvider = ({ children }) => {
     if (userData) {
       const socket = io("http://localhost:15000");
       setSocket(socket);
+      socket.on("connect", () => console.log("connected:", socket.id));
+      return () => {
+        socket.off("disconnect", () => console.log("disconnected:", socket.id));
+        socket.disconnect();
+      };
     } else {
       setSocket(null);
     }
