@@ -13,7 +13,6 @@ const Conversations = ({ receiver }) => {
     if (receiver._id) {
       const fetch = async (id) => {
         const result = await getConversation(id);
-        console.log("conversation:", result);
         setConversations(result.data);
       };
       fetch(receiver._id);

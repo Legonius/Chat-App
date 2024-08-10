@@ -10,6 +10,7 @@ export const useSocketContext = () => {
 
 const SocketContextProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
+  const [getOnlineUsers, setOnlineUsers] = useState();
   const { userData } = useAuthContext();
   useEffect(() => {
     if (userData) {

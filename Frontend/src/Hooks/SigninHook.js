@@ -29,7 +29,6 @@ const useSigninHook = () => {
         credentials: "include", // Include credentials in the request
       });
       const getUserData = await response.json();
-      console.log("getUserData:", getUserData);
 
       if (!getUserData.success) {
         return toast.error(getUserData.message);

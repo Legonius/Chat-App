@@ -11,3 +11,7 @@
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
 }
+
+.online.online::before {
+  @apply outline-slate-400;
+}

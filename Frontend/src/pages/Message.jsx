@@ -23,14 +23,26 @@ const Message = () => {
   return (
     <div className="h-full w-full flex flex-col pt-10 justify-between no-scrollbar">
       <div className="absolute w-full top-0 left-0 h-12 bg-slate-400 rounded-t-lg text-slate-50 font-extrabold text-xl flex items-center justify-start px-2">
-        <img
+        {/* <img
           className="h-8 w-8 bg-cover rounded-full"
           src={
             oppositeData.avatar === "default"
               ? `../../public/${oppositeData.gender}.jpeg`
               : `http://localhost:15000/public/images/${oppositeData.avatar}`
           }
-        />
+        /> */}
+        <div className="avatar offline">
+          <div className="w-8 rounded-full">
+            <img
+              src={
+                oppositeData.avatar === "default"
+                  ? `../../public/${oppositeData.gender}.jpeg`
+                  : `http://localhost:15000/public/images/${oppositeData.avatar}`
+              }
+              alt="profile pic"
+            />
+          </div>
+        </div>
         <span className="ml-2">{oppositeData.username}</span>
       </div>
       <BackButton link={"login"} />
