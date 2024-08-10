@@ -91,6 +91,7 @@ const login = async (req, res, next) => {
     res.status(200).json({
       success: true,
       data: {
+        id: user._id,
         username: user.username,
         email: user.email,
         avatar: user.avatar,
