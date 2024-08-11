@@ -19,7 +19,7 @@ io.on("connection", (socket) => {
     delete getSocketMap[userID];
   });
   console.log(getSocketMap);
+  io.emit("getOnlineUsers", getSocketMap);
 });
-io.emit("getOnlineUsers", getSocketMap);
 
 export { app, server, io, getSocketMap };

@@ -4,11 +4,14 @@ import { useParams } from "react-router-dom";
 import useMessageHook from "../Hooks/MessageHook.js";
 import Conversations from "../components/Conversations.jsx";
 import SendMsg from "../components/SendMsg.jsx";
+import { useSocketContext } from "../Context/SocketContext.jsx";
 
 const Message = () => {
   const { oppositeChatId } = useParams();
   const { setLoading, loading, findFriend } = useMessageHook();
   const [oppositeData, setOppositeData] = useState({});
+  const { allOnlineUsers } = useSocketContext();
+  const isOnline = Object.keys(allOnlineUsers).includes(oppositeChatId);
 
   useEffect(() => {
     const getOpsData = async (id) => {
@@ -31,7 +34,7 @@ const Message = () => {
               : `http://localhost:15000/public/images/${oppositeData.avatar}`
           }
         /> */}
-        <div className="avatar offline">
+        <div className={`avatar ${isOnline ? "online" : "offline"}`}>
           <div className="w-8 rounded-full">
             <img
               src={
