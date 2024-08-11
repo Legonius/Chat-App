@@ -47,6 +47,8 @@ const Signup = () => {
           className="rounded-md bg-slate-200 px-2 outline-none h-7"
           type="text"
           name="username"
+          id="username"
+          autoComplete="off"
           required
           value={userForm.username}
           onChange={handleChange}
@@ -60,6 +62,7 @@ const Signup = () => {
           className="rounded-md bg-slate-200 px-2 outline-none h-7"
           type="email"
           name="email"
+          id="email"
           value={userForm.email}
           onChange={handleChange}
         />
@@ -73,6 +76,7 @@ const Signup = () => {
           className="rounded-md bg-slate-200 px-2 outline-none h-7"
           type="password"
           name="password"
+          id="password"
           value={userForm.password}
           onChange={handleChange}
         />
@@ -85,6 +89,7 @@ const Signup = () => {
           className="rounded-md bg-slate-200 px-2 outline-none h-7"
           type="password"
           name="confirmPassword"
+          id="confirmPassword"
           value={userForm.confirmPassword}
           onChange={handleChange}
         />
@@ -96,6 +101,7 @@ const Signup = () => {
           className="rounded-md bg-slate-200 px-2 outline-none h-7"
           type="number"
           name="age"
+          id="age"
           value={userForm.age}
           onChange={handleChange}
         />
@@ -129,6 +135,7 @@ const Signup = () => {
         </label>
         <input
           name="avatar"
+          id="avatar"
           type="file"
           onChange={(e) =>
             setUserForm({ ...userForm, avatar: e.target.files[0] })

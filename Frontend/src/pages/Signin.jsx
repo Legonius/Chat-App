@@ -16,13 +16,15 @@ const Signin = () => {
     <div className="text-slate-400 h-[90%] w-[90%] flex flex-col justify-center items-center">
       <p className="mb-3 text-xl font-extrabold ">Welcome!</p>
       <form onSubmit={handleSignin} className="flex flex-col gap-1">
-        <label htmlFor="username">
+        <label htmlFor="email">
           <span>Email</span>
         </label>
         <input
+          id="email"
           className="rounded-md bg-slate-200 px-2 outline-none h-7"
           type="text"
           name="email"
+          autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -32,9 +34,11 @@ const Signin = () => {
           <span>Password</span>
         </label>
         <input
+          id="password"
           className="rounded-md bg-slate-200 px-2 outline-none h-7"
           type="password"
           name="password"
+          autoComplete="off"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
