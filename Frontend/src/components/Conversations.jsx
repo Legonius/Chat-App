@@ -5,12 +5,14 @@ import useConversationHook from "../Hooks/ConversationHook";
 import MsgBoxes from "./MsgBoxes";
 import MsgDefault from "./MsgDefault";
 import { useSocketContext } from "../Context/SocketContext";
+import audio from "../assets/chat-sound.mp3";
 
 const Conversations = ({ receiver }) => {
   const { loading, getConversation } = useConversationHook();
   const { conversations, setConversations } = useAuthContext();
   const { socket } = useSocketContext();
   const msgEndRef = useRef("");
+  const chatAudio = new Audio(audio);
   useEffect(() => {
     if (receiver._id) {
       const fetch = async (id) => {
@@ -23,6 +25,8 @@ const Conversations = ({ receiver }) => {
   useEffect(() => {
     socket.on("privateMsg", (msg) => {
       setConversations([...conversations, msg.newMessage]);
+      //sound adding
+      chatAudio.play();
     });
     if (msgEndRef.current) {
       msgEndRef.current.scrollIntoView({ behavior: "smooth" });

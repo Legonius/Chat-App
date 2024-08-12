@@ -18,7 +18,7 @@ const SocketContextProvider = ({ children }) => {
         query: { userId: userData.id },
       });
       setSocket(socket);
-      socket.on("connect", () => console.log("connected:", socket.id));
+      // socket.on("connect", () => console.log("connected:", socket.id));
       socket.on("getOnlineUsers", (onlineUsers) => {
         setOnlineUsers(onlineUsers);
       });
