@@ -22,7 +22,6 @@ export const checkAuthen = async (req, res, next) => {
       return next(errorHandling(403, "User need to login"));
     }
     req.user = user;
-    console.log("Auth Check Done");
     next();
   } catch (error) {
     next(error);

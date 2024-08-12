@@ -22,8 +22,7 @@ const Conversations = ({ receiver }) => {
   }, [receiver]);
   useEffect(() => {
     socket.on("privateMsg", (msg) => {
-      console.log(msg);
-      setConversations(msg.newMessage);
+      setConversations([...conversations, msg.newMessage]);
     });
     if (msgEndRef.current) {
       msgEndRef.current.scrollIntoView({ behavior: "smooth" });
