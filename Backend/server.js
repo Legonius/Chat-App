@@ -7,7 +7,7 @@ import msgRoute from "./routes/message.routes.js";
 import allUsersRoute from "./routes/allUsers.routes.js";
 import cors from "cors";
 import path from "path";
-import { app, server } from "./socket.js";
+import { app, server } from "./websocket.js";
 dotenv.config();
 
 mongoose

@@ -1,6 +1,6 @@
 import conversationModel from "../models/conversationModel.js";
 import messageModel from "../models/messageModel.js";
-import mongoose from "mongoose";
+import { getSocketId, io } from "../websocket.js"; //error occur when adding this
 import { errorHandling } from "../utils/error.js";
 
 const msgSend = async (req, res, next) => {
@@ -32,6 +32,12 @@ const msgSend = async (req, res, next) => {
     }
     await Promise.all([conversation.save(), newMessage.save()]);
     //Socket io Functionallity session
+
+    const socketReceiverId = getSocketId(receiverId);
+
+    if (socketReceiverId) {
+      io.to(socketReceiverId).emit("privateMsg", { success: true, newMessage });
+    }
 
     res.status(201).json({ success: true, newMessage });
 

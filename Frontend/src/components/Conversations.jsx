@@ -1,13 +1,15 @@
 import React, { useRef } from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useAuthContext } from "../Context/AuthContext";
 import useConversationHook from "../Hooks/ConversationHook";
 import MsgBoxes from "./MsgBoxes";
 import MsgDefault from "./MsgDefault";
+import { useSocketContext } from "../Context/SocketContext";
 
 const Conversations = ({ receiver }) => {
   const { loading, getConversation } = useConversationHook();
   const { conversations, setConversations } = useAuthContext();
+  const { socket } = useSocketContext();
   const msgEndRef = useRef("");
   useEffect(() => {
     if (receiver._id) {
@@ -19,10 +21,15 @@ const Conversations = ({ receiver }) => {
     }
   }, [receiver]);
   useEffect(() => {
+    socket.on("privateMsg", (msg) => {
+      console.log(msg);
+      setConversations(msg.newMessage);
+    });
     if (msgEndRef.current) {
       msgEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [conversations]);
+    return () => socket.off("privateMsg");
+  }, [conversations, socket]);
   return (
     <div>
       {loading ? (

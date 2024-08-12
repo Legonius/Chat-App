@@ -5,7 +5,7 @@ const BackButton = ({ link }) => {
   return (
     <>
       <Link
-        className="absolute right-3 top-3 text-white font-bold"
+        className="z-30 absolute right-3 top-3 text-white font-bold"
         to={`/${link}`}
       >
         Back

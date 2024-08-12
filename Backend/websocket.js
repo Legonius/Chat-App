@@ -10,16 +10,23 @@ const io = new Server(server, {
     methods: ["GET", "POST"],
   },
 });
+
 const getSocketMap = {};
+
 io.on("connection", (socket) => {
   const userID = socket.handshake.query.userId;
   if (userID) getSocketMap[userID] = socket.id;
   socket.on("disconnect", () => {
     console.log("disconnected", socket.id);
     delete getSocketMap[userID];
+    io.emit("getOnlineUsers", getSocketMap);
   });
   console.log(getSocketMap);
   io.emit("getOnlineUsers", getSocketMap);
 });
 
-export { app, server, io, getSocketMap };
+const getSocketId = (id) => {
+  return getSocketMap[id];
+};
+
+export { app, server, io, getSocketId };

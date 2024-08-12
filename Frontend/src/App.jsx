@@ -5,9 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import Signup from "./pages/Signup";
 import { Toaster } from "react-hot-toast";
 import { useAuthContext } from "./Context/AuthContext";
-import { useSocketContext } from "./Context/SocketContext.jsx";
 import { Navigate } from "react-router-dom";
-import { useEffect } from "react";
 
 function App() {
   const { userData } = useAuthContext();
@@ -16,7 +14,7 @@ function App() {
     <>
       <div className="overflow-x-scroll flex justify-center items-center h-screen bg-slate-500">
         <div className="relative artboard phone-1 bg-gray-300 rounded-lg p-4 flex flex-col justify-center items-center">
-          <div className="absolute w-full top-0 left-0 h-12 bg-slate-400 rounded-t-lg text-slate-50 font-extrabold text-xl flex items-center justify-start gap-2 px-2">
+          <div className="z-20 absolute w-full top-0 left-0 h-12 bg-slate-400 rounded-t-lg text-slate-50 font-extrabold text-xl flex items-center justify-start gap-2 px-2">
             Watt's<span className="text-blue-500">Chatt</span>
           </div>
           <Routes>

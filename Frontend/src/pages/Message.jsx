@@ -16,7 +16,6 @@ const Message = () => {
   useEffect(() => {
     const getOpsData = async (id) => {
       const res = await findFriend(id);
-      console.log("res:", res);
       setOppositeData(res);
       setLoading(false);
     };
@@ -25,15 +24,7 @@ const Message = () => {
 
   return (
     <div className="h-full w-full flex flex-col pt-10 justify-between no-scrollbar">
-      <div className="absolute w-full top-0 left-0 h-12 bg-slate-400 rounded-t-lg text-slate-50 font-extrabold text-xl flex items-center justify-start px-2">
-        {/* <img
-          className="h-8 w-8 bg-cover rounded-full"
-          src={
-            oppositeData.avatar === "default"
-              ? `../../public/${oppositeData.gender}.jpeg`
-              : `http://localhost:15000/public/images/${oppositeData.avatar}`
-          }
-        /> */}
+      <div className="z-30 absolute w-full top-0 left-0 h-12 bg-slate-400 rounded-t-lg text-slate-50 font-extrabold text-xl flex items-center justify-start px-2">
         <div className={`avatar ${isOnline ? "online" : "offline"}`}>
           <div className="w-8 rounded-full">
             <img

@@ -7,12 +7,13 @@ import ContextProvider from "./Context/AuthContext.jsx";
 import SocketContextProvider from "./Context/SocketContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  // <React.StrictMode>
-  <BrowserRouter>
-    <ContextProvider>
-      <SocketContextProvider>
-        <App />
-      </SocketContextProvider>
-    </ContextProvider>
-  </BrowserRouter>
+  <React.StrictMode>
+    <BrowserRouter>
+      <ContextProvider>
+        <SocketContextProvider>
+          <App />
+        </SocketContextProvider>
+      </ContextProvider>
+    </BrowserRouter>
+  </React.StrictMode>
 );

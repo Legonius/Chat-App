@@ -16,13 +16,13 @@ const Login = () => {
   }, []);
 
   return (
-    <div className="overflow-y-scroll w-full h-full pt-10 ">
+    <div className="overflow-y-scroll w-full h-full pt-10">
       <div
         onClick={logout}
-        className="absolute right-3 top-3 text-white underline cursor-pointer"
+        className="z-30 absolute right-3 top-3 text-white underline cursor-pointer"
       >
         <span
-          className={`text-[11px] ${loading ? "loading loading-spinner" : ""}`}
+          className={` text-[11px] ${loading ? "loading loading-spinner" : ""}`}
         >
           Sign out
         </span>
