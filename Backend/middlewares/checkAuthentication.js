@@ -7,7 +7,7 @@ export const checkAuthen = async (req, res, next) => {
     const token = req.cookies?.uid;
     if (!token) {
       console.log("No Token:", token);
-      return next();
+      return next(errorHandling(403, "session expired"));
     }
     const payload = jwt.verify(token, process.env.JWT_CODE);
     if (!payload) {

@@ -11,7 +11,10 @@ const Message = () => {
   const { setLoading, loading, findFriend } = useMessageHook();
   const [oppositeData, setOppositeData] = useState({});
   const { allOnlineUsers } = useSocketContext();
-  const isOnline = Object.keys(allOnlineUsers).includes(oppositeChatId);
+  let isOnline;
+  if (allOnlineUsers) {
+    isOnline = Object.keys(allOnlineUsers).includes(oppositeChatId);
+  }
 
   useEffect(() => {
     const getOpsData = async (id) => {

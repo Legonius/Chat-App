@@ -24,10 +24,13 @@ const Conversations = ({ receiver }) => {
   }, [receiver]);
   useEffect(() => {
     socket.on("privateMsg", (msg) => {
-      setConversations([...conversations, msg.newMessage]);
+      if (msg) {
+        setConversations([...conversations, msg.newMessage]);
+      }
       //sound adding
       chatAudio.play();
     });
+
     if (msgEndRef.current) {
       msgEndRef.current.scrollIntoView({ behavior: "smooth" });
     }

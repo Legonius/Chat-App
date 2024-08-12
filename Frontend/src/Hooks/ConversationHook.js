@@ -15,6 +15,10 @@ const useConversationHook = () => {
       if (data.success) {
         return data;
       } else {
+        if (data.message === "session expired") {
+          localStorage.removeItem("chat-app-user");
+          return toast.error("Session Expired");
+        }
         toast.error("Can't get Conversations");
       }
     } catch (error) {

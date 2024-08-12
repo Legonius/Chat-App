@@ -20,7 +20,7 @@ const useLogout = () => {
       });
       const data = await response.json();
       if (data.success) {
-        // localStorage.removeItem("chat-app-user");
+        localStorage.removeItem("chat-app-user");
         setUserData(null);
         setAllUserData([]);
         toast.success("Logout Seccessfully.");

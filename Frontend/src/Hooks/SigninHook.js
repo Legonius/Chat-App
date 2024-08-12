@@ -34,7 +34,7 @@ const useSigninHook = () => {
         return toast.error(getUserData.message);
       } else {
         toast.success("Login Successfully!");
-        // localStorage.setItem("chat-app-user", JSON.stringify(getUserData.data));
+        localStorage.setItem("chat-app-user", JSON.stringify(getUserData.data));
         setUserData(getUserData.data);
       }
     } catch (error) {

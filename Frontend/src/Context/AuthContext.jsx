@@ -7,7 +7,8 @@ export const useAuthContext = () => {
 };
 
 export default function ContextProvider({ children }) {
-  const [userData, setUserData] = useState(null);
+  let recentUser = JSON.parse(localStorage.getItem("chat-app-user"));
+  const [userData, setUserData] = useState(recentUser || null);
   const [allUserData, setAllUserData] = useState([]);
   const [conversations, setConversations] = useState([]);
   return (

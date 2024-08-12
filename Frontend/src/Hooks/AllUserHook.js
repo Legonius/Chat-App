@@ -16,6 +16,11 @@ const useAllUserHook = () => {
       });
       const allUsers = await data.json();
       if (!allUsers.success) {
+        console.log(allUsers);
+        if (allUsers.message === "session expired") {
+          localStorage.removeItem("chat-app-user");
+          return toast.error("Session Expired");
+        }
         return toast.error("Users not found");
       }
       setAllUserData(allUsers.data);
