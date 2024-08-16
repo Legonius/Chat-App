@@ -18,8 +18,7 @@ mongoose
 const PORT = process.env.SERVER_PORT;
 
 const corsOptions = {
-  // origin: ["http://localhost:5173", "http://192.168.100.171:5173"],
-  origin: "*",
+  origin: ["http://localhost:5173", "http://192.168.100.171:5173"],
   credentials: true, // Allow credentials (cookies) to be sent
   methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
   allowedHeaders: "Content-Type,Authorization",
