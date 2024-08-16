@@ -55,7 +55,7 @@ export const useSignup = () => {
       formData.append("age", age);
       formData.append("gender", gender);
       formData.append("avatar", avatar);
-      const response = await fetch("http://localhost:15000/api/user/signup", {
+      const response = await fetch("/api/user/signup", {
         method: "post",
         // headers: { "Content-Type": "application/json" },
         body: formData,
@@ -64,7 +64,6 @@ export const useSignup = () => {
       if (!user.success) {
         return toast.error(user.message);
       }
-      console.log(user);
       if (user._id) {
         signIn(email, password);
         setUserForm({

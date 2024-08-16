@@ -9,14 +9,6 @@ const useMessageHook = () => {
   const findFriend = (id) => {
     try {
       setLoading(true);
-      // const response = await fetch(
-      //   `http://localhost:15000/api/user/findUser/${id}`,
-      //   {
-      //     method: "get",
-      //     credentials: "include",
-      //   }
-      // );
-      // const data = await response.json();
       const data = allUserData.filter((x) => id === x._id);
       if (data) {
         return data[0];

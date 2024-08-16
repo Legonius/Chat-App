@@ -22,7 +22,7 @@ const useSigninHook = () => {
     const data = JSON.stringify({ email, password });
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:15000/api/user/login", {
+      const response = await fetch("/api/user/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: data,

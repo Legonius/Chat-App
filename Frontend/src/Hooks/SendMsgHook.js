@@ -10,16 +10,13 @@ const useSendMsgHook = () => {
     try {
       if (!message) return true;
       setLoading(true);
-      const response = await fetch(
-        `http://localhost:15000/api/msg/send/${id}`,
-        {
-          method: "post",
-          credentials: "include",
-          secure: false,
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message }),
-        }
-      );
+      const response = await fetch(`/api/msg/send/${id}`, {
+        method: "post",
+        credentials: "include",
+        secure: false,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message }),
+      });
       const msgData = await response.json();
       if (msgData.message === "session expired") {
         localStorage.removeItem("chat-app-user");

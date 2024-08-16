@@ -1,6 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../Context/AuthContext";
+import sessionExpire from "../utils/sessionExpire.js";
 
 const useAllUserHook = () => {
   const [loading1, setLoading1] = useState(false);
@@ -9,7 +10,7 @@ const useAllUserHook = () => {
   const getUsers = async () => {
     try {
       setLoading1(true);
-      const data = await fetch("http://localhost:15000/api/all-users", {
+      const data = await fetch("/api/all-users", {
         headers: { "Content-Type": "application/json" },
         method: "GET",
         credentials: "include",
@@ -18,8 +19,7 @@ const useAllUserHook = () => {
       if (!allUsers.success) {
         console.log(allUsers);
         if (allUsers.message === "session expired") {
-          localStorage.removeItem("chat-app-user");
-          return toast.error("Session Expired");
+          sessionExpire();
         }
         return toast.error("Users not found");
       }

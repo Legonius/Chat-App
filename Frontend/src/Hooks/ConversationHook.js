@@ -7,7 +7,7 @@ const useConversationHook = () => {
   const getConversation = async (id) => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:15000/api/msg/${id}`, {
+      const response = await fetch(`/api/msg/${id}`, {
         method: "get",
         credentials: "include",
       });
