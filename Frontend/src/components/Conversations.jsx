@@ -13,6 +13,7 @@ const Conversations = ({ receiver }) => {
   const { socket } = useSocketContext();
   const msgEndRef = useRef("");
   const chatAudio = new Audio(audio);
+
   useEffect(() => {
     if (receiver._id) {
       const fetch = async (id) => {
@@ -30,6 +31,7 @@ const Conversations = ({ receiver }) => {
       //sound adding
       chatAudio.play();
     });
+    socket.on("delivered", (d) => console.log("dele:", d));
 
     if (msgEndRef.current) {
       msgEndRef.current.scrollIntoView({ behavior: "smooth" });

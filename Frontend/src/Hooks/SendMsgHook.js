@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuthContext } from "../Context/AuthContext";
 import toast from "react-hot-toast";
+import sessionExpire from "../utils/sessionExpire";
 
 const useSendMsgHook = () => {
   const [loading, setLoading] = useState(false);
@@ -19,8 +20,7 @@ const useSendMsgHook = () => {
       });
       const msgData = await response.json();
       if (msgData.message === "session expired") {
-        localStorage.removeItem("chat-app-user");
-        return toast.error("Session Expired");
+        sessionExpire();
       }
       setConversations([...conversations, msgData.newMessage]);
       return msgData.success;
