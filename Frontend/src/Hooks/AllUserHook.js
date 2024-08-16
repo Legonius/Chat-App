@@ -1,11 +1,12 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../Context/AuthContext";
-import sessionExpire from "../utils/sessionExpire.js";
+import { useNavigate } from "react-router-dom";
 
 const useAllUserHook = () => {
   const [loading1, setLoading1] = useState(false);
   const { setAllUserData } = useAuthContext();
+  const navigate = useNavigate();
 
   const getUsers = async () => {
     try {
@@ -17,9 +18,10 @@ const useAllUserHook = () => {
       });
       const allUsers = await data.json();
       if (!allUsers.success) {
-        console.log(allUsers);
         if (allUsers.message === "session expired") {
-          sessionExpire();
+          localStorage.removeItem("chat-app-user");
+          navigate("/");
+          return toast.error("Session Expired");
         }
         return toast.error("Users not found");
       }

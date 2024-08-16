@@ -6,8 +6,10 @@ import MsgBoxes from "./MsgBoxes";
 import MsgDefault from "./MsgDefault";
 import { useSocketContext } from "../Context/SocketContext";
 import audio from "../assets/chat-sound.mp3";
+import { useNavigate } from "react-router-dom";
 
 const Conversations = ({ receiver }) => {
+  const navigate = useNavigate();
   const { loading, getConversation } = useConversationHook();
   const { conversations, setConversations } = useAuthContext();
   const { socket } = useSocketContext();
@@ -24,6 +26,9 @@ const Conversations = ({ receiver }) => {
     }
   }, [receiver]);
   useEffect(() => {
+    if (!socket) {
+      return navigate("/");
+    }
     socket.on("privateMsg", (msg) => {
       if (msg) {
         setConversations([...conversations, msg.newMessage]);
