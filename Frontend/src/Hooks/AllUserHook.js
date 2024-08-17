@@ -16,7 +16,9 @@ const useAllUserHook = () => {
         method: "GET",
         credentials: "include",
       });
+
       const allUsers = await data.json();
+
       if (!allUsers.success) {
         if (allUsers.message === "session expired") {
           localStorage.removeItem("chat-app-user");
