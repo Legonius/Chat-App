@@ -1,6 +1,6 @@
 import conversationModel from "../models/conversationModel.js";
 import messageModel from "../models/messageModel.js";
-import { getSocketId, io } from "../websocket.js"; //error occur when adding this
+import { getSocketId, io } from "../websocket.js";
 import { errorHandling } from "../utils/error.js";
 
 const msgSend = async (req, res, next) => {
@@ -46,7 +46,7 @@ const msgSend = async (req, res, next) => {
   } catch (error) {
     // session.abortTransaction();
     // session.endSession();
-    // res.status(400).json({ success: false, message: error.message });
+    res.status(400).json({ success: false, message: error.message });
   }
 };
 
