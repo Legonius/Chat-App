@@ -49,9 +49,9 @@ app.use((err, req, res, next) => {
   });
 });
 
-server.listen(PORT, () =>
-  console.log(`Server is running at http://localhost:${PORT}`)
-);
+// server.listen(PORT, () =>
+//   console.log(`Server is running at http://localhost:${PORT}`)
+// );
 
 // additional setting to use if needed
 // app.use((req, res, next) => {
