@@ -8,7 +8,6 @@ import allUsersRoute from "./routes/allUsers.routes.js";
 import cors from "cors";
 import path from "path";
 import { app, server } from "./websocket.js";
-import path from "path";
 dotenv.config();
 
 mongoose
