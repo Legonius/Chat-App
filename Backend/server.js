@@ -12,12 +12,23 @@ import { fileURLToPath } from "url";
 
 dotenv.config();
 
+// mongoose
+//   .connect(process.env.MONGO_URL)
+//   .then(() => console.log("MongoDB is connected"))
+//   .catch((err) => console.log("Mongodb connection error: ", err));
+let isConnected = false;
 mongoose
-  .connect(process.env.MONGO_URL)
-  .then(() => console.log("MongoDB is connected"))
-  .catch((err) => console.log("Mongodb connection error: ", err));
+  .connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    isConnected = true;
+    console.log("MongoDB is connected");
+  })
+  .catch((err) => console.log("MongoDB connection error:", err));
 
-// const PORT = process.env.SERVER_PORT;
+// const PORT = process.env.SERVER_PORT;s
 
 // const corsOptions = {
 //   origin: "*:*", //["http://localhost:5173", "http://192.168.100.171:5173"],
@@ -62,7 +73,7 @@ app.use((err, req, res, next) => {
 //   console.log(`Server is running at http://localhost:${PORT}`)
 // );
 
-export const handler = server;
+export default server;
 
 // additional setting to use if needed
 // app.use((req, res, next) => {
