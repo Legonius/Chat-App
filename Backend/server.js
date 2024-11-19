@@ -8,6 +8,8 @@ import allUsersRoute from "./routes/allUsers.routes.js";
 import cors from "cors";
 import path from "path";
 import { app, server } from "./websocket.js";
+import { fileURLToPath } from "url";
+
 dotenv.config();
 
 mongoose
@@ -15,14 +17,17 @@ mongoose
   .then(() => console.log("MongoDB is connected"))
   .catch((err) => console.log("Mongodb connection error: ", err));
 
-const PORT = process.env.SERVER_PORT;
+// const PORT = process.env.SERVER_PORT;
 
-const corsOptions = {
-  origin: "*:*", //["http://localhost:5173", "http://192.168.100.171:5173"],
-  credentials: true, // Allow credentials (cookies) to be sent
-  methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
-  allowedHeaders: "Content-Type,Authorization",
-};
+// const corsOptions = {
+//   origin: "*:*", //["http://localhost:5173", "http://192.168.100.171:5173"],
+//   credentials: true, // Allow credentials (cookies) to be sent
+//   methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
+//   allowedHeaders: "Content-Type,Authorization",
+// };
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 app.use(
   "/favicon.ico",
   express.static(path.join(__dirname, "public/favicon.ico"))
