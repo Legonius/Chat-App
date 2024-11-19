@@ -17,11 +17,11 @@ const ensureDirExists = (dirPath) => {
 };
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const dir = "./public/images";
-    ensureDirExists(dir);
-    cb(null, dir);
-  },
+  // destination: (req, file, cb) => {
+  //   const dir = "./public/images";
+  //   ensureDirExists(dir);
+  //   cb(null, dir);
+  // },
   filename: (req, file, cb) => {
     cb(null, Date.now() + file.originalname);
   },

@@ -2,6 +2,7 @@ import { userModel } from "../models/userModel.js";
 import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
 import { errorHandling } from "../utils/error.js";
+import uploadImage from "../config/imagekit.js";
 
 // Signup Secssion
 const signup = async (req, res, next) => {
@@ -32,9 +33,12 @@ const signup = async (req, res, next) => {
   if (password !== confirmPassword) {
     return next(errorHandling(401, "Password don't match,please try again"));
   }
-  const saltRounds = parseInt(process.env.SALT_ROUNDS);
-  const salt = await bcryptjs.genSalt(saltRounds);
+  // const saltRounds = parseInt(process.env.SALT_ROUNDS);
+  // const salt = await bcryptjs.genSalt(saltRounds);
   const hashPassword = await bcryptjs.hash(password, 10);
+  if (req.file) {
+    var { url } = await uploadImage(req.file.path, req.file.filename);
+  }
   try {
     const newUser = await userModel.create({
       username,
@@ -42,7 +46,7 @@ const signup = async (req, res, next) => {
       age,
       password: hashPassword,
       gender,
-      avatar: req.file ? req.file.filename : "default",
+      avatar: url ? url : "default",
     });
     res.status(202).json({
       success: true,

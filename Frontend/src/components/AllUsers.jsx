@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { useSocketContext } from "../Context/SocketContext";
 
@@ -13,9 +12,7 @@ const AllUsers = ({ data }) => {
           <div className="w-12 rounded-full">
             <img
               src={
-                data.avatar === "default"
-                  ? `/${data.gender}.jpeg`
-                  : `http://localhost:15000/public/images/${data.avatar}`
+                data.avatar === "default" ? `/${data.gender}.jpeg` : data.avatar
               }
               alt="profile pic"
             />

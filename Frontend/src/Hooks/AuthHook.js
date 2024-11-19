@@ -1,6 +1,5 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useAuthContext } from "../Context/AuthContext.jsx";
 import useSigninHook from "./SigninHook.js";
 
 const handleError = ({
@@ -31,7 +30,6 @@ const handleError = ({
 export const useSignup = () => {
   const { signIn } = useSigninHook();
   const [loading, setLoading] = useState(false);
-  const { setUserData } = useAuthContext();
   const signup = async (userForm, setUserForm) => {
     const { username, email, password, confirmPassword, age, gender, avatar } =
       userForm;

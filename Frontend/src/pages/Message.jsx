@@ -34,7 +34,7 @@ const Message = () => {
               src={
                 oppositeData.avatar === "default"
                   ? `../../public/${oppositeData.gender}.jpeg`
-                  : `http://localhost:15000/public/images/${oppositeData.avatar}`
+                  : oppositeData.avatar
               }
               alt="profile pic"
             />

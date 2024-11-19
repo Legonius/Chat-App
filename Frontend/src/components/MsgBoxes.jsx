@@ -26,11 +26,11 @@ const MsgBoxes = ({ message, other }) => {
     if (message.receiverId === other._id) {
       userData.avatar === "default"
         ? (avatar = `/${userData.gender}.jpeg`)
-        : (avatar = `http://localhost:15000/public/images/${userData.avatar}`);
+        : (avatar = userData.avatar);
     } else {
       other.avatar === "default"
         ? (avatar = `/${other.gender}.jpeg`)
-        : (avatar = `http://localhost:15000/public/images/${other.avatar}`);
+        : (avatar = other.avatar);
     }
     return avatar;
   };
