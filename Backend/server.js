@@ -8,6 +8,7 @@ import allUsersRoute from "./routes/allUsers.routes.js";
 import cors from "cors";
 import path from "path";
 import { app, server } from "./websocket.js";
+import path from "path";
 dotenv.config();
 
 mongoose
@@ -23,6 +24,10 @@ const corsOptions = {
   methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
   allowedHeaders: "Content-Type,Authorization",
 };
+app.use(
+  "/favicon.ico",
+  express.static(path.join(__dirname, "public/favicon.ico"))
+);
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
