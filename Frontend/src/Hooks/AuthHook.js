@@ -53,11 +53,18 @@ export const useSignup = () => {
       formData.append("age", age);
       formData.append("gender", gender);
       formData.append("avatar", avatar);
-      const response = await fetch("/api/user/signup", {
-        method: "post",
-        // headers: { "Content-Type": "application/json" },
-        body: formData,
-      });
+      const response = await fetch(
+        import.meta.env.VITE_SERVER_URL + "/api/user/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: formData,
+        }
+      );
+      console.log(response);
       const user = await response.json();
       if (!user.success) {
         return toast.error(user.message);
