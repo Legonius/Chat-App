@@ -43,7 +43,14 @@ app.use(
   "/favicon.ico",
   express.static(path.join(__dirname, "public/favicon.ico"))
 );
-app.use(cors());
+const allowedOrigins = ["https://chat-app-frontend-ten-eta.vercel.app/"];
+app.use(
+  cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
