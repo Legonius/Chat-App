@@ -87,9 +87,10 @@ const login = async (req, res, next) => {
     const oneHour = 3600000;
     const isProduction = process.env.NODE_ENV === "production";
     res.cookie("uid", token, {
-      sameSite: isProduction ? "none" : "lax", // Required for cross-origin requests
+      // sameSite: isProduction ? "none" : "lax", // Required for cross-origin requests
+      sameSite: "none",
       httpOnly: true, // Cookie is only accessible by the web server
-      secure: isProduction, // Set to true if using HTTPS
+      secure: true, // Set to true if using HTTPS
       maxAge: oneHour,
     });
     res.status(200).json({
