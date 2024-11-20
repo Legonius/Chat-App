@@ -1,5 +1,6 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { VITE_SERVER_URL } from "../utils/constants";
 
 const useConversationHook = () => {
   const [loading, setLoading] = useState(false);
@@ -7,13 +8,10 @@ const useConversationHook = () => {
   const getConversation = async (id) => {
     try {
       setLoading(true);
-      const response = await fetch(
-        import.meta.env.VITE_SERVER_URL + `/api/msg/${id}`,
-        {
-          method: "get",
-          credentials: "include",
-        }
-      );
+      const response = await fetch(VITE_SERVER_URL + `/api/msg/${id}`, {
+        method: "get",
+        credentials: "include",
+      });
       const data = await response.json();
       if (data.success) {
         return data;

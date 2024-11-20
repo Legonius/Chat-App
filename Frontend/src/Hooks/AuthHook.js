@@ -1,6 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import useSigninHook from "./SigninHook.js";
+import { VITE_SERVER_URL } from "../utils/constants.js";
 
 const handleError = ({
   username,
@@ -53,17 +54,14 @@ export const useSignup = () => {
       formData.append("age", age);
       formData.append("gender", gender);
       formData.append("avatar", avatar);
-      const response = await fetch(
-        import.meta.env.VITE_SERVER_URL + "/api/user/signup",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: formData,
-        }
-      );
+      const response = await fetch(VITE_SERVER_URL + "/api/user/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: formData,
+      });
       console.log("res:", response);
       const user = await response.json();
       if (!user.success) {

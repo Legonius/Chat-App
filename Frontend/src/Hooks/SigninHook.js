@@ -1,6 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../Context/AuthContext.jsx";
+import { VITE_SERVER_URL } from "../utils/constants.js";
 
 const inputErrorHandling = (email, password) => {
   if (!email || !password) {
@@ -22,16 +23,13 @@ const useSigninHook = () => {
     const data = JSON.stringify({ email, password });
     try {
       setLoading(true);
-      console.log(import.meta.env.VITE_SERVER_URL + "/api/user/login");
-      const response = await fetch(
-        import.meta.env.VITE_SERVER_URL + "/api/user/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: data,
-          credentials: "include", // Include credentials in the request
-        }
-      );
+      console.log(VITE_SERVER_URL + "/api/user/login");
+      const response = await fetch(VITE_SERVER_URL + "/api/user/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: data,
+        credentials: "include", // Include credentials in the request
+      });
       const getUserData = await response.json();
 
       if (!getUserData.success) {

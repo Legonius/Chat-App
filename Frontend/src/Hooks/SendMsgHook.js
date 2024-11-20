@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuthContext } from "../Context/AuthContext";
 import toast from "react-hot-toast";
 import sessionExpire from "../utils/sessionExpire";
+import { VITE_SERVER_URL } from "../utils/constants";
 
 const useSendMsgHook = () => {
   const [loading, setLoading] = useState(false);
@@ -11,16 +12,13 @@ const useSendMsgHook = () => {
     try {
       if (!message) return true;
       setLoading(true);
-      const response = await fetch(
-        import.meta.env.VITE_SERVER_URL + `/api/msg/send/${id}`,
-        {
-          method: "post",
-          credentials: "include",
-          secure: false,
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message }),
-        }
-      );
+      const response = await fetch(VITE_SERVER_URL + `/api/msg/send/${id}`, {
+        method: "post",
+        credentials: "include",
+        secure: false,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message }),
+      });
       const msgData = await response.json();
       if (msgData.message === "session expired") {
         sessionExpire();

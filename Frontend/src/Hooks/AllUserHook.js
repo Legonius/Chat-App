@@ -2,6 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { VITE_SERVER_URL } from "../utils/constants";
 
 const useAllUserHook = () => {
   const [loading1, setLoading1] = useState(false);
@@ -11,14 +12,11 @@ const useAllUserHook = () => {
   const getUsers = async () => {
     try {
       setLoading1(true);
-      const data = await fetch(
-        import.meta.env.VITE_SERVER_URL + "/api/all-users",
-        {
-          headers: { "Content-Type": "application/json" },
-          method: "GET",
-          credentials: "include",
-        }
-      );
+      const data = await fetch(VITE_SERVER_URL + "/api/all-users", {
+        headers: { "Content-Type": "application/json" },
+        method: "GET",
+        credentials: "include",
+      });
 
       const allUsers = await data.json();
 
