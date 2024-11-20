@@ -64,7 +64,7 @@ export const useSignup = () => {
           body: formData,
         }
       );
-      console.log(response);
+      console.log("res:", response);
       const user = await response.json();
       if (!user.success) {
         return toast.error(user.message);
