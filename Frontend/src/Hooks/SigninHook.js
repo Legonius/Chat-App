@@ -22,6 +22,7 @@ const useSigninHook = () => {
     const data = JSON.stringify({ email, password });
     try {
       setLoading(true);
+      console.log(import.meta.env.VITE_SERVER_URL + "/api/user/login");
       const response = await fetch(
         import.meta.env.VITE_SERVER_URL + "/api/user/login",
         {
