@@ -43,6 +43,7 @@ app.use(
   "/favicon.ico",
   express.static(path.join(__dirname, "public/favicon.ico"))
 );
+app.options("*", cors());
 const allowedOrigins = ["https://chat-app-frontend-ten-eta.vercel.app/"];
 app.use(
   cors({
