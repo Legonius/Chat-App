@@ -46,6 +46,7 @@ app.use(
 const allowedOrigins = [
   "https://chat-app-frontend-ten-beta.vercel.app",
   "https://chat-app-frontend-6jsontuuz-zaw-min-thu-projects.vercel.app",
+  "http://localhost:5173",
 ];
 
 app.use(
