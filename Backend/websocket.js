@@ -18,7 +18,7 @@ const io = initializeSocket(server, {
   origins: [
     "http://localhost:5173",
     "http://192.168.100.171:5173",
-    "https://chat-app-frontend-ten-eta.vercel.app/",
+    "https://chat-app-frontend-ten-eta.vercel.app",
   ], // Older method for socket.io@2.x
   credentials: true,
   handlePreflightRequest: (req, res) => {
@@ -26,7 +26,7 @@ const io = initializeSocket(server, {
     const allowedOrigins = [
       "http://localhost:5173",
       "http://192.168.100.171:5173",
-      "https://chat-app-frontend-ten-eta.vercel.app/",
+      "https://chat-app-frontend-ten-eta.vercel.app",
     ];
     const origin = req.headers.origin;
 
