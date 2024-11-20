@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import AllUsers from "../components/AllUsers";
 import useLogout from "../Hooks/LogoutHook.js";
 import useAllUserHook from "../Hooks/AllUserHook.js";

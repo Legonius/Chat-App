@@ -11,11 +11,14 @@ const useAllUserHook = () => {
   const getUsers = async () => {
     try {
       setLoading1(true);
-      const data = await fetch("/api/all-users", {
-        headers: { "Content-Type": "application/json" },
-        method: "GET",
-        credentials: "include",
-      });
+      const data = await fetch(
+        import.meta.env.VITE_SERVER_URL + "/api/all-users",
+        {
+          headers: { "Content-Type": "application/json" },
+          method: "GET",
+          credentials: "include",
+        }
+      );
 
       const allUsers = await data.json();
 

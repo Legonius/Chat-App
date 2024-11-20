@@ -22,12 +22,15 @@ const useSigninHook = () => {
     const data = JSON.stringify({ email, password });
     try {
       setLoading(true);
-      const response = await fetch("/api/user/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: data,
-        credentials: "include", // Include credentials in the request
-      });
+      const response = await fetch(
+        import.meta.env.VITE_SERVER_URL + "/api/user/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: data,
+          credentials: "include", // Include credentials in the request
+        }
+      );
       const getUserData = await response.json();
 
       if (!getUserData.success) {
