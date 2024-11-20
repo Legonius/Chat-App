@@ -44,7 +44,7 @@ app.use(
   express.static(path.join(__dirname, "public/favicon.ico"))
 );
 const allowedOrigins = [
-  "https://chat-app-frontend-ten-eta.vercel.app",
+  "https://chat-app-frontend-ten-beta.vercel.app",
   "https://chat-app-frontend-6jsontuuz-zaw-min-thu-projects.vercel.app",
 ];
 
