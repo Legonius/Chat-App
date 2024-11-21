@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import io from "socket.io-client"; // socket v ^2.2.0
 import { useAuthContext } from "./AuthContext";
+import { VITE_SERVER_URL } from "../utils/constants";
 
 export const socketContext = createContext();
 
@@ -14,7 +15,7 @@ const SocketContextProvider = ({ children }) => {
   const { userData } = useAuthContext();
   useEffect(() => {
     if (userData) {
-      const socketInstance = io("http://192.168.100.171:15000", {
+      const socketInstance = io(VITE_SERVER_URL, {
         withCredentials: true,
         query: { userId: userData.id },
       });
