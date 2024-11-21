@@ -2,7 +2,7 @@ import express from "express";
 import { createServer } from "http";
 import Server from "socket.io";
 import initializeSocket from "socket.io"; //  versin ^2.2.0
-import { FRONT_URL } from "./constants";
+import { FRONT_URL } from "./constants.js";
 
 const app = express();
 const server = createServer(app);

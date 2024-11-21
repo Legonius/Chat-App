@@ -44,28 +44,28 @@ app.use(
   "/favicon.ico",
   express.static(path.join(__dirname, "public/favicon.ico"))
 );
-// const allowedOrigins = [
-//   "https://chat-app-frontend-ten-beta.vercel.app",
-//   "https://chat-app-frontend-6jsontuuz-zaw-min-thu-projects.vercel.app",
-//   "http://localhost:5173",
-//   FRONT_URL,
-// ];
+const allowedOrigins = [
+  "https://chat-app-frontend-ten-beta.vercel.app",
+  "https://chat-app-frontend-6jsontuuz-zaw-min-thu-projects.vercel.app",
+  "http://localhost:5173",
+  FRONT_URL,
+];
 
-// app.use(
-//   cors({
-//     origin: (origin, callback) => {
-//       // Allow requests with no origin (like mobile apps or curl requests)
-//       if (!origin || allowedOrigins.includes(origin)) {
-//         callback(null, true);
-//       } else {
-//         callback(new Error("Not allowed by CORS"));
-//       }
-//     },
-//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed methods
-//     credentials: true, // Allow cookies and credentials
-//   })
-// );
-app.use(cors());
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed methods
+    credentials: true, // Allow cookies and credentials
+  })
+);
+// app.use(cors());
 // Handle preflight requests
 app.options("*", (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", req.headers.origin || "*");
