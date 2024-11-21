@@ -84,14 +84,14 @@ const login = async (req, res, next) => {
       { username: user.username, email: user.email },
       process.env.JWT_CODE
     );
-    const oneHour = 3600000;
+    // const oneHour = 3600000;
     const isProduction = process.env.NODE_ENV === "production";
     res.cookie("uid", token, {
       // sameSite: isProduction ? "none" : "lax", // Required for cross-origin requests
       sameSite: "none",
       httpOnly: true, // Cookie is only accessible by the web server
       secure: true, // Set to true if using HTTPS
-      maxAge: oneHour,
+      // maxAge: oneHour,
     });
     res.status(200).json({
       success: true,

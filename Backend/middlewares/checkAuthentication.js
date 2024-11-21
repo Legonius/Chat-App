@@ -5,9 +5,9 @@ import { errorHandling } from "../utils/error.js";
 export const checkAuthen = async (req, res, next) => {
   try {
     const token = req.cookies?.uid;
-    if (!token) {
-      return next(errorHandling(403, "session expired"));
-    }
+    // if (!token) {
+    //   return next(errorHandling(403, "session expired"));
+    // }
     const payload = jwt.verify(token, process.env.JWT_CODE);
     if (!payload) {
       console.log("jwt can't verify");
