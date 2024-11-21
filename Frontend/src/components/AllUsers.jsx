@@ -14,7 +14,7 @@ const AllUsers = ({ data }) => {
               src={
                 data.avatar === "default" ? `/${data.gender}.jpeg` : data.avatar
               }
-              alt="profile pic"
+              alt="profile img"
             />
           </div>
         </div>
