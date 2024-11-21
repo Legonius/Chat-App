@@ -2,6 +2,7 @@ import express from "express";
 import { createServer } from "http";
 import Server from "socket.io";
 import initializeSocket from "socket.io"; //  versin ^2.2.0
+import { FRONT_URL } from "./constants";
 
 const app = express();
 const server = createServer(app);
@@ -15,18 +16,14 @@ const server = createServer(app);
 // Initialize socket.io with the server versin ^2.2.0
 const io = initializeSocket(server, {
   // Specify allowed origins
-  origins: [
-    "http://localhost:5173",
-    "http://192.168.100.171:5173",
-    "https://chat-app-frontend-ten-eta.vercel.app",
-  ], // Older method for socket.io@2.x
+  origins: ["http://localhost:5173", "http://192.168.100.171:5173", FRONT_URL], // Older method for socket.io@2.x
   credentials: true,
   handlePreflightRequest: (req, res) => {
     // Determine the correct origin to allow
     const allowedOrigins = [
       "http://localhost:5173",
       "http://192.168.100.171:5173",
-      "https://chat-app-frontend-ten-eta.vercel.app",
+      FRONT_URL,
     ];
     const origin = req.headers.origin;
 
