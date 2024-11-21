@@ -67,7 +67,7 @@ const login = async (req, res, next) => {
   try {
     if (req.cookies?.uid) {
       console.log("some Cookie when login");
-      // res.clearCookie("uid");
+      res.clearCookie("uid");
       // next();
     }
     const { email, password } = req.body;
