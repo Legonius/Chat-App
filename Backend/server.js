@@ -50,7 +50,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   FRONT_URL,
 ];
-
+/*
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -66,6 +66,8 @@ app.use(
   })
 );
 // app.use(cors());
+
+
 // Handle preflight requests
 app.options("*", (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", req.headers.origin || "*");
@@ -77,6 +79,16 @@ app.options("*", (req, res) => {
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.sendStatus(204);
 });
+*/
+app.use(
+  cors({
+    origin: [
+      "https://chat-app-frontend-ten-beta.vercel.app",
+      "https://chat-app-frontend-6jsontuuz-zaw-min-thu-projects.vercel.app",
+    ],
+  })
+);
+app.options("*", cors(allowedOrigins));
 
 app.use(cookieParser());
 app.use(express.json());
