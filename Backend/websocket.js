@@ -19,6 +19,7 @@ const io = initializeSocket(server, {
   origins: [
     "*",
     "https://chat-app-frontend-ten-beta.vercel.app",
+    "https://chat-app-frontend-m2w7f0xa9-zaw-min-thu-projects.vercel.app",
     "https://chat-app-frontend-6jsontuuz-zaw-min-thu-projects.vercel.app",
     "http://localhost:5173",
     "http://192.168.100.171:5173",
@@ -30,6 +31,7 @@ const io = initializeSocket(server, {
     const allowedOrigins = [
       "*",
       "https://chat-app-frontend-ten-beta.vercel.app",
+      "https://chat-app-frontend-m2w7f0xa9-zaw-min-thu-projects.vercel.app",
       "https://chat-app-frontend-6jsontuuz-zaw-min-thu-projects.vercel.app",
       "http://localhost:5173",
       "http://192.168.100.171:5173",

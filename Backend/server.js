@@ -46,6 +46,7 @@ app.use(
 );
 const allowedOrigins = [
   "https://chat-app-frontend-ten-beta.vercel.app",
+  "https://chat-app-frontend-m2w7f0xa9-zaw-min-thu-projects.vercel.app/",
   "https://chat-app-frontend-6jsontuuz-zaw-min-thu-projects.vercel.app",
   "http://localhost:5173",
   FRONT_URL,
@@ -83,7 +84,9 @@ app.options("*", (req, res) => {
 app.use(
   cors({
     origin: [
+      "*",
       "https://chat-app-frontend-ten-beta.vercel.app",
+      "https://chat-app-frontend-m2w7f0xa9-zaw-min-thu-projects.vercel.app",
       "https://chat-app-frontend-6jsontuuz-zaw-min-thu-projects.vercel.app",
     ],
   })
