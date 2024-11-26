@@ -119,7 +119,7 @@ app.use((err, req, res, next) => {
 //   console.log(`Server is running at http://localhost:${PORT}`)
 // );
 
-// export default server;
+export default server;
 
 // additional setting to use if needed
 // app.use((req, res, next) => {
