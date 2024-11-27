@@ -83,16 +83,27 @@ app.options("*", (req, res) => {
 */
 app.use(
   cors({
-    origin: [
-      "*",
-      "https://chat-app-frontend-ten-beta.vercel.app",
-      "https://chat-app-frontend-m2w7f0xa9-zaw-min-thu-projects.vercel.app",
-      "https://chat-app-frontend-6jsontuuz-zaw-min-thu-projects.vercel.app",
-    ],
-    credentials: true,
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true); // Allow access
+      } else {
+        callback(new Error("Not allowed by CORS")); // Deny access
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true, // Allow cookies or authorization headers
   })
 );
-app.options("*", cors(allowedOrigins));
+app.options("*", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", req.headers.origin || "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, X-Requested-With"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.sendStatus(204);
+});
 
 app.use(cookieParser());
 app.use(express.json());

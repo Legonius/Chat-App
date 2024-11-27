@@ -12,31 +12,24 @@ const server = createServer(app);
 //     origin: "*:*",
 //   },
 // });
+const allowedOrigins = [
+  "*",
+  "https://chat-app-frontend-ten-beta.vercel.app",
+  "https://chat-app-frontend-m2w7f0xa9-zaw-min-thu-projects.vercel.app",
+  "https://chat-app-frontend-6jsontuuz-zaw-min-thu-projects.vercel.app",
+  "http://localhost:5173",
+  "http://192.168.100.171:5173",
+  FRONT_URL,
+];
 
 // Initialize socket.io with the server versin ^2.2.0
 const io = initializeSocket(server, {
   // Specify allowed origins
-  origins: [
-    "*",
-    "https://chat-app-frontend-ten-beta.vercel.app",
-    "https://chat-app-frontend-m2w7f0xa9-zaw-min-thu-projects.vercel.app",
-    "https://chat-app-frontend-6jsontuuz-zaw-min-thu-projects.vercel.app",
-    "http://localhost:5173",
-    "http://192.168.100.171:5173",
-    FRONT_URL,
-  ], // Older method for socket.io@2.x
+  origins: allowedOrigins.join(" "), // Older method for socket.io@2.x
   credentials: true,
   handlePreflightRequest: (req, res) => {
     // Determine the correct origin to allow
-    const allowedOrigins = [
-      "*",
-      "https://chat-app-frontend-ten-beta.vercel.app",
-      "https://chat-app-frontend-m2w7f0xa9-zaw-min-thu-projects.vercel.app",
-      "https://chat-app-frontend-6jsontuuz-zaw-min-thu-projects.vercel.app",
-      "http://localhost:5173",
-      "http://192.168.100.171:5173",
-      FRONT_URL,
-    ];
+
     const origin = req.headers.origin;
 
     if (allowedOrigins.includes(origin)) {
