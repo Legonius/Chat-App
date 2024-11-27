@@ -89,6 +89,7 @@ app.use(
       "https://chat-app-frontend-m2w7f0xa9-zaw-min-thu-projects.vercel.app",
       "https://chat-app-frontend-6jsontuuz-zaw-min-thu-projects.vercel.app",
     ],
+    credentials: true,
   })
 );
 app.options("*", cors(allowedOrigins));
