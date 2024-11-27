@@ -3,15 +3,20 @@ import AllUsers from "../components/AllUsers";
 import useLogout from "../Hooks/LogoutHook.js";
 import useAllUserHook from "../Hooks/AllUserHook.js";
 import { useAuthContext } from "../Context/AuthContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { loading, logout } = useLogout();
   const { loading1, getUsers } = useAllUserHook();
-  const { allUserData } = useAuthContext();
+  const { allUserData, userData } = useAuthContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (allUserData.length < 1) {
       getUsers();
+    }
+    if (!userData) {
+      navigate("/");
     }
   }, []);
 
