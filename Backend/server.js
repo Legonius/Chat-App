@@ -29,7 +29,7 @@ mongoose
   })
   .catch((err) => console.log("MongoDB connection error:", err));
 
-// const PORT = process.env.SERVER_PORT;s
+const PORT = 10000;
 
 // const corsOptions = {
 //   origin: "*:*", //["http://localhost:5173", "http://192.168.100.171:5173"],
@@ -118,9 +118,9 @@ app.use((err, req, res, next) => {
   });
 });
 
-// server.listen(PORT, () =>
-//   console.log(`Server is running at http://localhost:${PORT}`)
-// );
+server.listen(PORT, () =>
+  console.log(`Server is running at http://localhost:${PORT}`)
+);
 
 export default server;
 
